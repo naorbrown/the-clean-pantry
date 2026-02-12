@@ -8,7 +8,7 @@
 
 ## What Is This?
 
-The Clean Pantry is a free, open-source collection of **250+ DIY recipes** and **65+ guides** for non-toxic home care. Four pantry staples handle 90% of your cleaning needs: **vinegar, baking soda, castile soap, and water**.
+The Clean Pantry is a free, open-source collection of **256 DIY recipes** and **64 guides** for non-toxic home care. Four pantry staples handle 90% of your cleaning needs: **vinegar, baking soda, castile soap, and water**.
 
 ## Highlights
 
@@ -58,14 +58,16 @@ Unit tests cover utility functions, category metadata, and structured data schem
 | `content.spec.ts` | Homepage sections, category grouping, dark mode, content validation |
 | `search.spec.ts` | Search dialog, keyboard shortcut (Cmd+K), backdrop |
 | `mobile.spec.ts` | Mobile menu, nav links, category listing, search button |
+| `visual.spec.ts` | Logo, favicon, dark background, illustrations, image alt text |
+| `ingredients.spec.ts` | Ingredient tiers, property cards, structured sections, related recipes |
 
 ## Project Structure
 
 ```
 src/
   content/
-    recipes/        # 250+ MDX recipe files (by category folder)
-    guides/         # 65+ MDX guide files (by category folder)
+    recipes/        # 256 MDX recipe files (by category folder)
+    guides/         # 64 MDX guide files (by category folder)
     ingredients/    # 6 core ingredient profiles
   components/       # Astro UI components
   layouts/          # Page layouts (recipe, guide, base)

@@ -65,4 +65,18 @@ test.describe('Content', () => {
     expect(text).not.toContain('Wilson');
     expect(text).not.toContain('Eck');
   });
+
+  test('recipe page has standard section headings', async ({ page }) => {
+    await page.goto('/recipes/kitchen/all-purpose-cleaner/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Why It Works' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Tips' })).toBeVisible();
+  });
+
+  test('previously fixed recipe uses ## Steps not ## How to Make It', async ({ page }) => {
+    await page.goto('/recipes/sleep-wellness/mattress-freshener/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    const body = await page.textContent('body');
+    expect(body).not.toContain('How to Make It');
+  });
 });
