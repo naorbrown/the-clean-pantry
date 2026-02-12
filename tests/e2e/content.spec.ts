@@ -39,18 +39,17 @@ test.describe('Content', () => {
     await expect(page.getByText('Secondary')).toBeVisible();
   });
 
-  test('dark mode toggle works', async ({ page }) => {
+  test('dark mode is always on', async ({ page }) => {
     await page.goto('/');
     const html = page.locator('html');
-
-    // Initially may or may not be dark
-    await page.locator('#theme-toggle').click();
     const hasDark = await html.evaluate((el) => el.classList.contains('dark'));
+    expect(hasDark).toBe(true);
+  });
 
-    // Toggle again
-    await page.locator('#theme-toggle').click();
-    const hasDarkAfter = await html.evaluate((el) => el.classList.contains('dark'));
-    expect(hasDark).not.toBe(hasDarkAfter);
+  test('no theme toggle button exists', async ({ page }) => {
+    await page.goto('/');
+    const toggleBtn = page.locator('#theme-toggle');
+    expect(await toggleBtn.count()).toBe(0);
   });
 
   test('no about page links exist in navigation', async ({ page }) => {

@@ -17,7 +17,7 @@ const literataFontUrl = url('/fonts/literata-variable.woff2');
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,12 +62,6 @@ const literataFontUrl = url('/fonts/literata-variable.woff2');
     <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />
     <script is:inline src={url('/pagefind/pagefind-ui.js')}></script>
 
-    <script is:inline>
-      const theme = localStorage.getItem('theme');
-      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      }
-    </script>
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-sage focus:text-white focus:px-4 focus:py-2 focus:rounded">

@@ -6,7 +6,7 @@ import GuideCard from '../../components/ui/GuideCard.astro';
 import CategoryIcon from '../../components/ui/CategoryIcon.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import { getCollection } from 'astro:content';
-import { getCategories, categoryLabel, url } from '../../lib/utils';
+import { getCategories, categoryLabel, getSuperCategoryForSub, url } from '../../lib/utils';
 
 export function getStaticPaths() {
   return getCategories().map((cat) => ({
@@ -16,6 +16,7 @@ export function getStaticPaths() {
 }
 
 const { category, description } = Astro.props;
+const parentSuperCat = getSuperCategoryForSub(category);
 const recipes = await getCollection('recipes', ({ data }) => !data.draft && data.category === category);
 let guides: any[] = [];
 try { guides = await getCollection('guides', ({ data }) => !data.draft && data.category === category); } catch { /* empty */ }
@@ -23,7 +24,11 @@ try { guides = await getCollection('guides', ({ data }) => !data.draft && data.c
 
 <PageLayout title={categoryLabel(category)} description={description}>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-    <Breadcrumb items={[{ label: 'Categories', href: '/categories/' }, { label: categoryLabel(category) }]} />
+    <Breadcrumb items={[
+      { label: 'Categories', href: '/categories/' },
+      ...(parentSuperCat ? [{ label: parentSuperCat.name }] : []),
+      { label: categoryLabel(category) },
+    ]} />
 
     <div class="flex items-start gap-4 mt-4 mb-8">
       <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center">

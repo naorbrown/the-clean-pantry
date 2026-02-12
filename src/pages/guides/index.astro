@@ -2,44 +2,55 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import GuideCard from '../../components/ui/GuideCard.astro';
-import SectionHeader from '../../components/ui/SectionHeader.astro';
-import CategoryStrip from '../../components/ui/CategoryStrip.astro';
 import { getCollection } from 'astro:content';
-import { getCategories, url } from '../../lib/utils';
+import { getSuperCategories, categoryLabel, url } from '../../lib/utils';
 
 let allGuides: any[] = [];
 try { allGuides = await getCollection('guides', ({ data }) => !data.draft); } catch { /* empty */ }
-const categories = getCategories();
+const superCategories = getSuperCategories();
 ---
 
 <PageLayout title="All Guides" description="Browse all guides and resources — expert knowledge for every room and situation.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Guides' }]} />
-    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text mt-4 mb-8">All Guides</h1>
-    <div class="mb-8"><CategoryStrip categories={categories} /></div>
+    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">All Guides</h1>
+    <p class="text-dark-text/60 mb-10">In-depth guides to help you make informed choices about the products in your home.</p>
 
-    {categories.map((cat) => {
-      const catGuides = allGuides.filter((g) => g.data.category === cat.slug);
-      if (catGuides.length === 0) return null;
+    {superCategories.map((sc) => {
+      const scGuides = allGuides.filter((g) => sc.subcategories.includes(g.data.category));
+      if (scGuides.length === 0) return null;
       return (
-        <section class="mb-12">
-          <SectionHeader title={cat.name} viewAllHref={url(`/categories/${cat.slug}/`)} />
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {catGuides.map((guide) => (
-              <GuideCard
-                href={url(`/guides/${guide.id}/`)}
-                title={guide.data.title}
-                description={guide.data.description}
-                category={guide.data.category}
-              />
-            ))}
+        <div class="mb-14">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="text-xl">{sc.icon}</span>
+            <h2 class="font-serif text-xl font-semibold text-dark-text">{sc.name}</h2>
           </div>
-        </section>
+          {sc.subcategories.map((subSlug) => {
+            const subGuides = scGuides.filter((g) => g.data.category === subSlug);
+            if (subGuides.length === 0) return null;
+            return (
+              <section class="mb-8 ml-2">
+                <h3 class="font-serif text-lg font-medium text-dark-text/80 mb-4">{categoryLabel(subSlug)}</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {subGuides.map((guide) => (
+                    <GuideCard
+                      href={url(`/guides/${guide.id}/`)}
+                      title={guide.data.title}
+                      description={guide.data.description}
+                      category={guide.data.category}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+          <div class="section-divider"></div>
+        </div>
       );
     })}
 
     {allGuides.length === 0 && (
-      <p class="text-bark-light/60 dark:text-dark-text/50 text-center py-12">Guides coming soon.</p>
+      <p class="text-dark-text/50 text-center py-12">Guides coming soon.</p>
     )}
   </div>
 </PageLayout>
