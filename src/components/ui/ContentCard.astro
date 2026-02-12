@@ -1,5 +1,5 @@
 ---
-import CategoryIcon from './CategoryIcon.astro';
+import BrandIllustration from './BrandIllustration.astro';
 import { categoryLabel, getCategoryIcon, formatDuration } from '../../lib/utils';
 
 interface Props {
@@ -41,6 +41,34 @@ const gradientMap: Record<string, string> = {
 
 const gradient = gradientMap[category] || 'from-sage-light/20 to-dark-elevated/30';
 
+type IllustrationVariant = 'leaf' | 'bottle' | 'soap' | 'spray' | 'lemon' | 'herbs' | 'mortar' | 'drops';
+
+const illustrationMap: Record<string, IllustrationVariant> = {
+  kitchen:                'spray',
+  'kitchen-food-contact': 'lemon',
+  bathroom:               'drops',
+  'personal-care':        'bottle',
+  'beauty-cosmetics':     'mortar',
+  'baby-child':           'soap',
+  laundry:                'bottle',
+  floors:                 'spray',
+  'clothing-textiles':    'herbs',
+  'air-quality':          'herbs',
+  'candles-fragrance':    'mortar',
+  water:                  'drops',
+  'home-setup':           'leaf',
+  'pest-control':         'herbs',
+  'pet-care':             'soap',
+  'outdoor-garden':       'leaf',
+  'car-care':             'spray',
+  'deep-cleaning':        'bottle',
+  'fitness-wellness':     'drops',
+  'home-office':          'spray',
+  seasonal:               'lemon',
+};
+
+const illustration = illustrationMap[category] || 'leaf';
+
 const difficultyColor = difficulty === 'advanced'
   ? 'bg-terracotta/15 text-terracotta-light'
   : difficulty === 'intermediate'
@@ -56,9 +84,9 @@ const emoji = getCategoryIcon(category);
   href={href}
   class="group block rounded-xl overflow-hidden bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5 transition-all duration-200 no-underline"
 >
-  <div class={`h-28 bg-gradient-to-br ${gradient} opacity-80 flex items-center justify-center relative`}>
-    <CategoryIcon slug={category} size="lg" class="text-dark-text/20 group-hover:scale-110 transition-transform duration-300" />
-    <span class="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/40 bg-dark-bg/40 rounded-full px-2.5 py-0.5">
+  <div class={`h-28 bg-gradient-to-br ${gradient} flex items-center justify-center relative`}>
+    <BrandIllustration variant={illustration} class="w-16 h-16 text-dark-text/15 group-hover:text-dark-text/25 group-hover:scale-110 transition-all duration-300" />
+    <span class="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/50 bg-dark-bg/30 rounded-full px-2.5 py-0.5">
       {type === 'guide' ? 'Guide' : 'Recipe'}
     </span>
   </div>
