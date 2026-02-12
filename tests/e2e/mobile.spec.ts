@@ -16,6 +16,7 @@ test.describe('Mobile', () => {
     await expect(menu.getByRole('link', { name: 'Recipes' })).toBeVisible();
     await expect(menu.getByRole('link', { name: 'Guides' })).toBeVisible();
     await expect(menu.getByRole('link', { name: 'Ingredients' })).toBeVisible();
+    await expect(menu.getByRole('link', { name: 'About' })).toBeVisible();
   });
 
   test('mobile menu shows categories', async ({ page }) => {

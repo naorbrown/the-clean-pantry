@@ -1,6 +1,6 @@
 ---
 import CategoryIcon from './CategoryIcon.astro';
-import { categoryLabel, getCategoryIcon, formatDuration } from '../../lib/utils';
+import { categoryLabel, getCategoryIcon } from '../../lib/utils';
 
 interface Props {
   href: string;
@@ -8,12 +8,9 @@ interface Props {
   description: string;
   category: string;
   type: 'recipe' | 'guide';
-  totalTime?: string;
-  difficulty?: string;
-  ingredientCount?: number;
 }
 
-const { href, title, description, category, type, totalTime, difficulty, ingredientCount } = Astro.props;
+const { href, title, description, category, type } = Astro.props;
 
 const gradientMap: Record<string, string> = {
   kitchen:                'from-sage/30 to-sage-light/15',
@@ -45,15 +42,6 @@ const gradientMap: Record<string, string> = {
 };
 
 const gradient = gradientMap[category] || 'from-sage-light/30 to-dark-elevated/20';
-
-const difficultyColor = difficulty === 'advanced'
-  ? 'bg-terracotta/15 text-terracotta-light'
-  : difficulty === 'intermediate'
-    ? 'bg-honey/15 text-honey-light'
-    : 'bg-sage/15 text-sage-light';
-
-const difficultyLabel = difficulty === 'advanced' ? 'Advanced' : difficulty === 'intermediate' ? 'Intermediate' : 'Beginner';
-
 const emoji = getCategoryIcon(category);
 ---
 
@@ -61,9 +49,9 @@ const emoji = getCategoryIcon(category);
   href={href}
   class="group block rounded-xl overflow-hidden bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5 transition-all duration-200 no-underline"
 >
-  <div class={`h-20 bg-gradient-to-br ${gradient} flex items-end px-4 pb-3 relative overflow-hidden`}>
-    <CategoryIcon slug={category} size="xl" class="absolute -right-1 -bottom-1 text-dark-text/20 group-hover:text-dark-text/30 transition-all duration-300" />
-    <span class="absolute top-3 right-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/50 bg-dark-bg/30 rounded-full px-2.5 py-0.5">
+  <div class={`h-16 bg-gradient-to-br ${gradient} flex items-end px-4 pb-2.5 relative overflow-hidden`}>
+    <CategoryIcon slug={category} size="md" class="absolute -right-0.5 -bottom-0.5 text-dark-text/20 group-hover:text-dark-text/30 transition-all duration-300" />
+    <span class="absolute top-2.5 right-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/50 bg-dark-bg/30 rounded-full px-2.5 py-0.5">
       {type === 'guide' ? 'Guide' : 'Recipe'}
     </span>
     <p class="text-sm font-medium text-dark-text/70 flex items-center gap-1.5 relative z-10">
@@ -79,27 +67,5 @@ const emoji = getCategoryIcon(category);
     <p class="text-sm text-dark-text/60 mt-1.5 line-clamp-2">
       {description}
     </p>
-
-    {(totalTime || difficulty || ingredientCount) && (
-      <div class="flex items-center gap-3 mt-3 text-xs text-dark-text/40">
-        {totalTime && (
-          <span class="flex items-center gap-1">
-            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12,6 12,12 16,14" />
-            </svg>
-            {formatDuration(totalTime)}
-          </span>
-        )}
-        {difficulty && (
-          <span class={`px-2 py-0.5 rounded-full text-[10px] font-medium ${difficultyColor}`}>
-            {difficultyLabel}
-          </span>
-        )}
-        {ingredientCount && (
-          <span>{ingredientCount} ingredients</span>
-        )}
-      </div>
-    )}
   </div>
 </a>
