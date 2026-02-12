@@ -10,11 +10,11 @@ test.describe('Ingredient pages', () => {
 
   test('ingredient listing shows correct item counts per tier', async ({ page }) => {
     await page.goto('/ingredients/');
-    // Core tier: 3 items (white vinegar, baking soda, castile soap)
+    // Core tier: 4 items (white vinegar, baking soda, castile soap, lemon juice)
     const sections = page.locator('section');
     const coreSection = sections.first();
     const coreLinks = coreSection.locator('a[href*="/ingredients/"]');
-    expect(await coreLinks.count()).toBe(3);
+    expect(await coreLinks.count()).toBe(4);
   });
 
   test('ingredient detail page has property cards', async ({ page }) => {
@@ -41,11 +41,12 @@ test.describe('Ingredient pages', () => {
     expect(await recipeCards.count()).toBeGreaterThan(0);
   });
 
-  test('all 6 ingredient pages load successfully', async ({ page }) => {
+  test('all 7 ingredient pages load successfully', async ({ page }) => {
     const slugs = [
       'white-vinegar',
       'baking-soda',
       'castile-soap',
+      'lemon-juice',
       'washing-soda',
       'hydrogen-peroxide',
       'borax',

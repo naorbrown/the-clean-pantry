@@ -79,4 +79,26 @@ test.describe('Content', () => {
     const body = await page.textContent('body');
     expect(body).not.toContain('How to Make It');
   });
+
+  test('condiments category page loads and shows recipes', async ({ page }) => {
+    await page.goto('/categories/condiments/');
+    await expect(page.getByRole('heading', { name: 'Condiments' })).toBeVisible();
+    const recipeCards = page.locator('a[href*="/recipes/condiments/"]');
+    expect(await recipeCards.count()).toBe(8);
+  });
+
+  test('condiments recipe page has standard headings', async ({ page }) => {
+    await page.goto('/recipes/condiments/ketchup/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Why It Works' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Tips' })).toBeVisible();
+  });
+
+  test('homepage shows four core ingredients', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('The Core Four Ingredients')).toBeVisible();
+    const coreSection = page.locator('section', { has: page.getByText('The Core Four Ingredients') });
+    const ingredientLinks = coreSection.locator('a[href*="/ingredients/"]');
+    expect(await ingredientLinks.count()).toBe(4);
+  });
 });

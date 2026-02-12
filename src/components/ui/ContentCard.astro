@@ -1,5 +1,5 @@
 ---
-import BrandIllustration from './BrandIllustration.astro';
+import CategoryIcon from './CategoryIcon.astro';
 import { categoryLabel, getCategoryIcon, formatDuration } from '../../lib/utils';
 
 interface Props {
@@ -16,66 +16,35 @@ interface Props {
 const { href, title, description, category, type, totalTime, difficulty, ingredientCount } = Astro.props;
 
 const gradientMap: Record<string, string> = {
-  kitchen:                'from-sage/20 to-sage-light/10',
-  'kitchen-food-contact': 'from-honey/20 to-honey-light/10',
-  bathroom:               'from-sky/20 to-sky-light/10',
-  'personal-care':        'from-terracotta-light/20 to-terracotta/10',
-  'beauty-cosmetics':     'from-terracotta/20 to-terracotta-light/10',
-  'baby-child':           'from-sky-light/20 to-sky/10',
-  laundry:                'from-sage-light/20 to-sage/10',
-  floors:                 'from-honey-light/20 to-honey/10',
-  'clothing-textiles':    'from-terracotta-light/20 to-sage-light/10',
-  'air-quality':          'from-sky/20 to-sage-light/10',
-  'candles-fragrance':    'from-honey/20 to-terracotta-light/10',
-  water:                  'from-sky/20 to-sky-light/10',
-  'home-setup':           'from-sage/20 to-honey-light/10',
-  'pest-control':         'from-terracotta/20 to-honey/10',
-  'pet-care':             'from-honey-light/20 to-sage-light/10',
-  'outdoor-garden':       'from-sage/20 to-sage-light/10',
-  'car-care':             'from-sky/20 to-honey-light/10',
-  'deep-cleaning':        'from-sage-dark/20 to-sage/10',
-  'fitness-wellness':     'from-sky/20 to-sage/10',
-  'home-office':          'from-sky-light/20 to-dark-elevated/30',
-  seasonal:               'from-terracotta-light/20 to-honey-light/10',
-  entertaining:           'from-honey/20 to-terracotta/10',
-  'sleep-wellness':       'from-sky-light/20 to-sage/10',
-  'daily-habits':         'from-sage-light/20 to-honey-light/10',
-  'elderly-accessibility':'from-terracotta-light/20 to-sky-light/10',
+  kitchen:                'from-sage/30 to-sage-light/15',
+  'kitchen-food-contact': 'from-honey/30 to-honey-light/15',
+  bathroom:               'from-sky/30 to-sky-light/15',
+  'personal-care':        'from-terracotta-light/30 to-terracotta/15',
+  'beauty-cosmetics':     'from-terracotta/30 to-terracotta-light/15',
+  'baby-child':           'from-sky-light/30 to-sky/15',
+  laundry:                'from-sage-light/30 to-sage/15',
+  floors:                 'from-honey-light/30 to-honey/15',
+  'clothing-textiles':    'from-terracotta-light/30 to-sage-light/15',
+  'air-quality':          'from-sky/30 to-sage-light/15',
+  'candles-fragrance':    'from-honey/30 to-terracotta-light/15',
+  water:                  'from-sky/30 to-sky-light/15',
+  'home-setup':           'from-sage/30 to-honey-light/15',
+  'pest-control':         'from-terracotta/30 to-honey/15',
+  'pet-care':             'from-honey-light/30 to-sage-light/15',
+  'outdoor-garden':       'from-sage/30 to-sage-light/15',
+  'car-care':             'from-sky/30 to-honey-light/15',
+  'deep-cleaning':        'from-sage-dark/30 to-sage/15',
+  'fitness-wellness':     'from-sky/30 to-sage/15',
+  'home-office':          'from-sky-light/30 to-dark-elevated/20',
+  seasonal:               'from-terracotta-light/30 to-honey-light/15',
+  entertaining:           'from-honey/30 to-terracotta/15',
+  'sleep-wellness':       'from-sky-light/30 to-sage/15',
+  'daily-habits':         'from-sage-light/30 to-honey-light/15',
+  'elderly-accessibility':'from-terracotta-light/30 to-sky-light/15',
+  condiments:             'from-honey/30 to-terracotta-light/15',
 };
 
-const gradient = gradientMap[category] || 'from-sage-light/20 to-dark-elevated/30';
-
-type IllustrationVariant = 'leaf' | 'bottle' | 'soap' | 'spray' | 'lemon' | 'herbs' | 'mortar' | 'drops';
-
-const illustrationMap: Record<string, IllustrationVariant> = {
-  kitchen:                'spray',
-  'kitchen-food-contact': 'lemon',
-  bathroom:               'drops',
-  'personal-care':        'bottle',
-  'beauty-cosmetics':     'mortar',
-  'baby-child':           'soap',
-  laundry:                'bottle',
-  floors:                 'spray',
-  'clothing-textiles':    'herbs',
-  'air-quality':          'herbs',
-  'candles-fragrance':    'mortar',
-  water:                  'drops',
-  'home-setup':           'leaf',
-  'pest-control':         'herbs',
-  'pet-care':             'soap',
-  'outdoor-garden':       'leaf',
-  'car-care':             'spray',
-  'deep-cleaning':        'bottle',
-  'fitness-wellness':     'drops',
-  'home-office':          'spray',
-  seasonal:               'lemon',
-  entertaining:           'mortar',
-  'sleep-wellness':       'herbs',
-  'daily-habits':         'soap',
-  'elderly-accessibility':'drops',
-};
-
-const illustration = illustrationMap[category] || 'leaf';
+const gradient = gradientMap[category] || 'from-sage-light/30 to-dark-elevated/20';
 
 const difficultyColor = difficulty === 'advanced'
   ? 'bg-terracotta/15 text-terracotta-light'
@@ -92,17 +61,18 @@ const emoji = getCategoryIcon(category);
   href={href}
   class="group block rounded-xl overflow-hidden bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5 transition-all duration-200 no-underline"
 >
-  <div class={`h-28 bg-gradient-to-br ${gradient} flex items-center justify-center relative`}>
-    <BrandIllustration variant={illustration} class="w-16 h-16 text-dark-text/15 group-hover:text-dark-text/25 group-hover:scale-110 transition-all duration-300" />
-    <span class="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/50 bg-dark-bg/30 rounded-full px-2.5 py-0.5">
+  <div class={`h-20 bg-gradient-to-br ${gradient} flex items-end px-4 pb-3 relative overflow-hidden`}>
+    <CategoryIcon slug={category} size="xl" class="absolute -right-1 -bottom-1 text-dark-text/20 group-hover:text-dark-text/30 transition-all duration-300" />
+    <span class="absolute top-3 right-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/50 bg-dark-bg/30 rounded-full px-2.5 py-0.5">
       {type === 'guide' ? 'Guide' : 'Recipe'}
     </span>
+    <p class="text-sm font-medium text-dark-text/70 flex items-center gap-1.5 relative z-10">
+      <span>{emoji}</span>
+      <span class="uppercase tracking-wider text-[11px]">{categoryLabel(category)}</span>
+    </p>
   </div>
 
   <div class="p-4 sm:p-5">
-    <p class="text-[11px] font-medium uppercase tracking-wider text-sage-light mb-1">
-      {emoji} {categoryLabel(category)}
-    </p>
     <h3 class="text-base sm:text-lg font-medium text-dark-text line-clamp-2 group-hover:text-sage-light transition-colors">
       {title}
     </h3>

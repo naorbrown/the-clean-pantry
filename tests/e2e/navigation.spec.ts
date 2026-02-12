@@ -75,9 +75,16 @@ test.describe('Navigation', () => {
     await expect(footer.getByRole('link', { name: 'Ingredients' })).toHaveAttribute('href', /\/the-clean-pantry\/ingredients\//);
   });
 
-  test('about page does not exist', async ({ page }) => {
+  test('about page loads', async ({ page }) => {
     const response = await page.goto('/about/');
-    expect(response?.status()).not.toBe(200);
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('h1')).toBeVisible();
+  });
+
+  test('footer has about link', async ({ page }) => {
+    await page.goto('/');
+    const footer = page.locator('footer');
+    await expect(footer.getByRole('link', { name: 'About' })).toHaveAttribute('href', /\/the-clean-pantry\/about\//);
   });
 
   test('all internal links have base path prefix', async ({ page }) => {

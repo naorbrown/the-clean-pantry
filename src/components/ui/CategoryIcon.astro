@@ -1,13 +1,13 @@
 ---
 interface Props {
   slug: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   class?: string;
 }
 
 const { slug, size = 'md', class: className = '' } = Astro.props;
 
-const sizeMap = { sm: 'w-4 h-4', md: 'w-6 h-6', lg: 'w-8 h-8' };
+const sizeMap = { sm: 'w-4 h-4', md: 'w-6 h-6', lg: 'w-8 h-8', xl: 'w-14 h-14' };
 const sizeClass = sizeMap[size];
 ---
 
@@ -216,7 +216,14 @@ const sizeClass = sizeMap[size];
       <path d="M14 21h4" />
     </Fragment>
   )}
-  {!['kitchen','kitchen-food-contact','bathroom','personal-care','beauty-cosmetics','baby-child','laundry','floors','clothing-textiles','air-quality','candles-fragrance','water','home-setup','pest-control','pet-care','outdoor-garden','car-care','deep-cleaning','fitness-wellness','home-office','seasonal','entertaining','sleep-wellness','daily-habits','elderly-accessibility'].includes(slug) && (
+  {slug === 'condiments' && (
+    <Fragment>
+      <path d="M9 3h6v2H9z" />
+      <path d="M8 5c0 0-1 1-1 3v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8c0-2-1-3-1-3" />
+      <line x1="8" y1="12" x2="16" y2="12" />
+    </Fragment>
+  )}
+  {!['kitchen','kitchen-food-contact','bathroom','personal-care','beauty-cosmetics','baby-child','laundry','floors','clothing-textiles','air-quality','candles-fragrance','water','home-setup','pest-control','pet-care','outdoor-garden','car-care','deep-cleaning','fitness-wellness','home-office','seasonal','entertaining','sleep-wellness','daily-habits','elderly-accessibility','condiments'].includes(slug) && (
     <Fragment>
       <rect x="4" y="4" width="16" height="16" rx="2" />
       <line x1="9" y1="9" x2="15" y2="9" />

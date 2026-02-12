@@ -62,6 +62,7 @@ describe('categoryLabel', () => {
     expect(categoryLabel('sleep-wellness')).toBe('Sleep & Wellness');
     expect(categoryLabel('daily-habits')).toBe('Daily Habits');
     expect(categoryLabel('elderly-accessibility')).toBe('Elderly & Accessibility');
+    expect(categoryLabel('condiments')).toBe('Condiments');
   });
 
   it('returns slug for unknown category', () => {
@@ -82,11 +83,11 @@ describe('getCategoryIcon', () => {
 });
 
 describe('getCategories', () => {
-  it('returns all 25 categories sorted by order', () => {
+  it('returns all 26 categories sorted by order', () => {
     const cats = getCategories();
-    expect(cats).toHaveLength(25);
+    expect(cats).toHaveLength(26);
     expect(cats[0].slug).toBe('kitchen');
-    expect(cats[24].slug).toBe('elderly-accessibility');
+    expect(cats[25].slug).toBe('condiments');
   });
 
   it('each category has slug, name, description, icon, and order', () => {
