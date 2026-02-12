@@ -108,8 +108,8 @@ describe('Recipe content consistency', () => {
 });
 
 describe('Ingredient content consistency', () => {
-  it('has 6 ingredient files', () => {
-    expect(ingredientFiles.length).toBe(6);
+  it('has 7 ingredient files', () => {
+    expect(ingredientFiles.length).toBe(7);
   });
 
   it('every ingredient has ## What It Does', () => {

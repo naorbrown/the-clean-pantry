@@ -53,6 +53,7 @@ const categories: Record<string, { name: string; description: string; icon: stri
   'sleep-wellness':       { name: 'Sleep & Wellness',      description: 'EMF reduction, circadian rhythms, bedroom plants, window treatments, and sleep optimization', icon: '🌙', order: 23 },
   'daily-habits':         { name: 'Daily Habits',          description: 'Shoe policies, medicine storage, receipt handling, and overlooked household best practices',   icon: '📋', order: 24 },
   'elderly-accessibility':{ name: 'Elderly & Accessibility',description: 'Grab bars, non-slip solutions, medication management, and elder-proofing your home',         icon: '♿', order: 25 },
+  condiments:             { name: 'Condiments',              description: 'Homemade ketchup, mustard, hot sauce, dressings, and sauces from scratch',                    icon: '🫙', order: 26 },
 };
 
 /**
@@ -136,8 +137,8 @@ const superCategories: SuperCategory[] = [
     slug: 'seasonal-specialty',
     name: 'Seasonal & Specialty',
     icon: '📅',
-    description: 'Holiday prep, seasonal cleaning, and food-safe kitchen solutions',
-    subcategories: ['kitchen-food-contact', 'seasonal'],
+    description: 'Holiday prep, seasonal cleaning, food-safe kitchen solutions, and homemade condiments',
+    subcategories: ['condiments', 'kitchen-food-contact', 'seasonal'],
   },
 ];
 
