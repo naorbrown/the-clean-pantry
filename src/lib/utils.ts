@@ -1,4 +1,12 @@
 /**
+ * Prefix a path with the configured Astro base path.
+ */
+export function url(path: string): string {
+  const base = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
+  return `${base}${path}`;
+}
+
+/**
  * Format an ISO 8601 duration string (e.g., "PT15M") to human-readable form.
  */
 export function formatDuration(iso: string): string {

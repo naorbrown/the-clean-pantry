@@ -1,4 +1,6 @@
 ---
+import { url } from '../../lib/utils';
+
 interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -14,13 +16,13 @@ const { items } = Astro.props;
 <nav aria-label="Breadcrumb" class="breadcrumb text-sm text-bark-light/60 dark:text-dark-text/50 mb-6">
   <ol class="flex items-center gap-1.5 flex-wrap">
     <li>
-      <a href="/" class="hover:text-sage-dark dark:hover:text-sage-light no-underline transition-colors">Home</a>
+      <a href={url('/')} class="hover:text-sage-dark dark:hover:text-sage-light no-underline transition-colors">Home</a>
     </li>
     {items.map((item, i) => (
       <li class="flex items-center gap-1.5">
         <span aria-hidden="true">/</span>
         {item.href ? (
-          <a href={item.href} class="hover:text-sage-dark dark:hover:text-sage-light no-underline transition-colors">
+          <a href={url(item.href)} class="hover:text-sage-dark dark:hover:text-sage-light no-underline transition-colors">
             {item.label}
           </a>
         ) : (

@@ -1,5 +1,5 @@
 ---
-import { getCategories } from '../../lib/utils';
+import { getCategories, url } from '../../lib/utils';
 
 const categories = getCategories().slice(0, 8);
 const year = new Date().getFullYear();
@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
       <!-- Brand -->
       <div>
-        <a href="/" class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
+        <a href={url('/')} class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
           The Clean Pantry
         </a>
         <p class="text-sm text-bark-light/60 dark:text-dark-text/50 mt-2 max-w-xs">
@@ -24,11 +24,10 @@ const year = new Date().getFullYear();
           Explore
         </p>
         <ul class="space-y-2">
-          <li><a href="/recipes/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">All Recipes</a></li>
-          <li><a href="/guides/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">All Guides</a></li>
-          <li><a href="/ingredients/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Ingredients</a></li>
-          <li><a href="/categories/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Categories</a></li>
-          <li><a href="/about/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">About</a></li>
+          <li><a href={url('/recipes/')} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">All Recipes</a></li>
+          <li><a href={url('/guides/')} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">All Guides</a></li>
+          <li><a href={url('/ingredients/')} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Ingredients</a></li>
+          <li><a href={url('/categories/')} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Categories</a></li>
         </ul>
       </div>
 
@@ -40,7 +39,7 @@ const year = new Date().getFullYear();
         <ul class="space-y-2">
           {categories.map((cat) => (
             <li>
-              <a href={`/categories/${cat.slug}/`} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">
+              <a href={url(`/categories/${cat.slug}/`)} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">
                 {cat.name}
               </a>
             </li>

@@ -5,7 +5,7 @@ import ContentCard from '../components/ui/ContentCard.astro';
 import GuideCard from '../components/ui/GuideCard.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import CategoryIcon from '../components/ui/CategoryIcon.astro';
-import { getCategories } from '../lib/utils';
+import { getCategories, url } from '../lib/utils';
 import { getCollection } from 'astro:content';
 
 const categories = getCategories();
@@ -18,42 +18,70 @@ try { allGuides = await getCollection('guides', ({ data }) => !data.draft); } ca
 const latestGuides = allGuides.slice(0, 4);
 
 const coreIngredients = (await getCollection('ingredients')).filter((i) => i.data.category === 'core');
+
+const stats = {
+  recipes: allRecipes.length,
+  guides: allGuides.length,
+  categories: categories.length,
+};
 ---
 
 <PageLayout title="The Clean Pantry" description="Simple, non-toxic recipes and guides for your entire home — from kitchen to garden, waking to sleeping.">
   <!-- Hero -->
-  <section class="bg-gradient-to-b from-cream to-cream-dark/40 dark:from-dark-bg dark:to-dark-surface/40">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
-      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-bark dark:text-dark-text leading-tight">
-        The Clean Pantry
-      </h1>
-      <p class="text-lg sm:text-xl text-bark-light/80 dark:text-dark-text/70 mt-4 max-w-2xl mx-auto">
-        Simple, non-toxic recipes and guides for your entire home. Replace every toxic product with something better.
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
-        <a href="/recipes/" class="inline-flex items-center px-5 py-2.5 bg-sage text-white rounded-lg font-medium text-sm no-underline hover:bg-sage-dark transition-colors">
-          Browse Recipes
-        </a>
-        <a href="/ingredients/" class="inline-flex items-center px-5 py-2.5 bg-white dark:bg-dark-surface text-bark dark:text-dark-text rounded-lg font-medium text-sm no-underline shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all">
-          Explore Ingredients
-        </a>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-sage-light/15 via-cream to-honey-light/10 dark:from-sage/5 dark:via-dark-bg dark:to-honey/5"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-sage-dark dark:text-sage-light font-medium text-sm uppercase tracking-wider mb-4">Your home, simplified</p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-bark dark:text-dark-text leading-[1.15]">
+          Replace toxic products with <span class="text-sage-dark dark:text-sage-light">simple, safe</span> alternatives
+        </h1>
+        <p class="text-lg sm:text-xl text-bark-light/80 dark:text-dark-text/70 mt-5 max-w-2xl mx-auto leading-relaxed">
+          Free recipes using everyday pantry ingredients — vinegar, baking soda, castile soap, and water do most of the work.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
+          <a href={url('/recipes/')} class="inline-flex items-center px-6 py-3 bg-sage text-white rounded-xl font-medium text-sm no-underline hover:bg-sage-dark shadow-sm hover:shadow-md transition-all">
+            Find a Recipe
+          </a>
+          <a href={url('/ingredients/')} class="inline-flex items-center px-6 py-3 bg-white dark:bg-dark-surface text-bark dark:text-dark-text rounded-xl font-medium text-sm no-underline shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all">
+            Explore Ingredients
+          </a>
+        </div>
+        <!-- Quick stats -->
+        <div class="flex items-center justify-center gap-6 sm:gap-8 mt-10 text-sm text-bark-light/60 dark:text-dark-text/50">
+          <div class="text-center">
+            <span class="block text-2xl font-bold text-bark dark:text-dark-text">{stats.recipes}</span>
+            <span>Recipes</span>
+          </div>
+          <div class="w-px h-8 bg-cream-dark dark:bg-dark-surface"></div>
+          <div class="text-center">
+            <span class="block text-2xl font-bold text-bark dark:text-dark-text">{stats.guides}</span>
+            <span>Guides</span>
+          </div>
+          <div class="w-px h-8 bg-cream-dark dark:bg-dark-surface"></div>
+          <div class="text-center">
+            <span class="block text-2xl font-bold text-bark dark:text-dark-text">{stats.categories}</span>
+            <span>Categories</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Category Strip -->
   <section class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <p class="text-center text-sm text-bark-light/60 dark:text-dark-text/50 mb-4 font-medium">Browse by category</p>
     <CategoryStrip categories={categories} />
   </section>
 
   <!-- Recipes -->
   {displayRecipes.length > 0 && (
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
-      <SectionHeader title="Recipes" viewAllHref="/recipes/" viewAllLabel="View all recipes" />
+      <SectionHeader title="Popular Recipes" viewAllHref={url('/recipes/')} viewAllLabel="View all recipes" />
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {displayRecipes.map((recipe) => (
           <ContentCard
-            href={`/recipes/${recipe.id}/`}
+            href={url(`/recipes/${recipe.id}/`)}
             title={recipe.data.title}
             description={recipe.data.description}
             category={recipe.data.category}
@@ -67,14 +95,44 @@ const coreIngredients = (await getCollection('ingredients')).filter((i) => i.dat
     </section>
   )}
 
+  <!-- How it works -->
+  <section class="bg-white/50 dark:bg-dark-surface/30 py-12 sm:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text text-center mb-10">How it works</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-2xl bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">1</span>
+          </div>
+          <h3 class="font-serif text-lg font-semibold text-bark dark:text-dark-text mb-2">Pick a recipe</h3>
+          <p class="text-sm text-bark-light/70 dark:text-dark-text/60 leading-relaxed">Browse {stats.recipes} recipes across {stats.categories} categories — from kitchen cleaners to pet care.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-2xl bg-honey-light/20 dark:bg-honey/10 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">2</span>
+          </div>
+          <h3 class="font-serif text-lg font-semibold text-bark dark:text-dark-text mb-2">Grab ingredients</h3>
+          <p class="text-sm text-bark-light/70 dark:text-dark-text/60 leading-relaxed">Most recipes use just 2-4 ingredients you probably already have at home.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-2xl bg-sky-light/20 dark:bg-sky/10 flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">3</span>
+          </div>
+          <h3 class="font-serif text-lg font-semibold text-bark dark:text-dark-text mb-2">Mix and use</h3>
+          <p class="text-sm text-bark-light/70 dark:text-dark-text/60 leading-relaxed">Follow the steps. Each recipe includes safety notes and tips for best results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Guides -->
   {latestGuides.length > 0 && (
-    <section class="bg-cream-dark/30 dark:bg-dark-surface/30 py-12">
+    <section class="py-12">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <SectionHeader title="Guides & Resources" viewAllHref="/guides/" viewAllLabel="View all guides" />
+        <SectionHeader title="Guides & Resources" viewAllHref={url('/guides/')} viewAllLabel="View all guides" />
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {latestGuides.map((guide) => (
-            <GuideCard href={`/guides/${guide.id}/`} title={guide.data.title} description={guide.data.description} category={guide.data.category} />
+            <GuideCard href={url(`/guides/${guide.id}/`)} title={guide.data.title} description={guide.data.description} category={guide.data.category} />
           ))}
         </div>
       </div>
@@ -86,14 +144,14 @@ const coreIngredients = (await getCollection('ingredients')).filter((i) => i.dat
     <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
       <div class="bg-sage-light/10 dark:bg-sage/5 rounded-2xl p-6 sm:p-10">
         <div class="text-center mb-8">
-          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">The Core Ingredients</h2>
-          <p class="text-bark-light/70 dark:text-dark-text/60 mt-2 max-w-lg mx-auto">
-            Just a few simple pantry staples handle the vast majority of household cleaning needs.
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">The Core Four Ingredients</h2>
+          <p class="text-bark-light/70 dark:text-dark-text/60 mt-2 max-w-lg mx-auto leading-relaxed">
+            These four pantry staples handle about 90% of household cleaning. Everything else is optional.
           </p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {coreIngredients.map((ing) => (
-            <a href={`/ingredients/${ing.id}/`} class="group flex flex-col items-center text-center p-4 rounded-xl bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline">
+            <a href={url(`/ingredients/${ing.id}/`)} class="group flex flex-col items-center text-center p-4 rounded-xl bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline">
               <div class="w-10 h-10 rounded-full bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center mb-2">
                 <CategoryIcon slug="kitchen" size="sm" class="text-sage-dark dark:text-sage-light" />
               </div>
@@ -103,7 +161,7 @@ const coreIngredients = (await getCollection('ingredients')).filter((i) => i.dat
           ))}
         </div>
         <div class="text-center mt-6">
-          <a href="/ingredients/" class="text-sm font-medium text-sage-dark dark:text-sage-light no-underline hover:text-sage transition-colors">Explore all ingredients &rarr;</a>
+          <a href={url('/ingredients/')} class="text-sm font-medium text-sage-dark dark:text-sage-light no-underline hover:text-sage transition-colors">Explore all ingredients &rarr;</a>
         </div>
       </div>
     </section>

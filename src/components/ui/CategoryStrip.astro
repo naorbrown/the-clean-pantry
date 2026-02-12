@@ -1,5 +1,6 @@
 ---
 import CategoryIcon from './CategoryIcon.astro';
+import { url } from '../../lib/utils';
 
 interface Props {
   categories: Array<{ slug: string; name: string; icon: string }>;
@@ -14,7 +15,7 @@ const { categories, activeSlug } = Astro.props;
     const isActive = cat.slug === activeSlug;
     return (
       <a
-        href={`/categories/${cat.slug}/`}
+        href={url(`/categories/${cat.slug}/`)}
         class:list={[
           'flex-none snap-start flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium no-underline whitespace-nowrap transition-all duration-150',
           isActive

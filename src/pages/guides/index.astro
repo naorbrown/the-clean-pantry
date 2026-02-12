@@ -5,7 +5,7 @@ import GuideCard from '../../components/ui/GuideCard.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CategoryStrip from '../../components/ui/CategoryStrip.astro';
 import { getCollection } from 'astro:content';
-import { getCategories } from '../../lib/utils';
+import { getCategories, url } from '../../lib/utils';
 
 let allGuides: any[] = [];
 try { allGuides = await getCollection('guides', ({ data }) => !data.draft); } catch { /* empty */ }
@@ -23,11 +23,11 @@ const categories = getCategories();
       if (catGuides.length === 0) return null;
       return (
         <section class="mb-12">
-          <SectionHeader title={cat.name} viewAllHref={`/categories/${cat.slug}/`} />
+          <SectionHeader title={cat.name} viewAllHref={url(`/categories/${cat.slug}/`)} />
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {catGuides.map((guide) => (
               <GuideCard
-                href={`/guides/${guide.id}/`}
+                href={url(`/guides/${guide.id}/`)}
                 title={guide.data.title}
                 description={guide.data.description}
                 category={guide.data.category}

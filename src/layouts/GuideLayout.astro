@@ -4,7 +4,7 @@ import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import CategoryIcon from '../components/ui/CategoryIcon.astro';
 import TableOfContents from '../components/ui/TableOfContents.astro';
 import RelatedContent from '../components/ui/RelatedContent.astro';
-import { categoryLabel } from '../lib/utils';
+import { categoryLabel, url } from '../lib/utils';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -35,7 +35,7 @@ const relatedGuides = allGuides
   .filter((g) => g.id !== guide.id)
   .slice(0, 3)
   .map((g) => ({
-    href: `/guides/${g.id}/`,
+    href: url(`/guides/${g.id}/`),
     title: g.data.title,
     description: g.data.description,
     category: g.data.category,
@@ -45,7 +45,7 @@ const relatedGuides = allGuides
 const relatedRecipes = allRecipes
   .slice(0, 3)
   .map((r) => ({
-    href: `/recipes/${r.id}/`,
+    href: url(`/recipes/${r.id}/`),
     title: r.data.title,
     description: r.data.description,
     category: r.data.category,
@@ -66,7 +66,7 @@ const related = [...relatedGuides, ...relatedRecipes].slice(0, 6);
     <div class="mt-4 mb-8">
       <div class="flex items-center gap-2 mb-3">
         <CategoryIcon slug={category} size="sm" class="text-sage-dark dark:text-sage-light" />
-        <a href={`/categories/${category}/`} class="text-xs font-semibold uppercase tracking-wider text-sage-dark dark:text-sage-light no-underline hover:underline">
+        <a href={url(`/categories/${category}/`)} class="text-xs font-semibold uppercase tracking-wider text-sage-dark dark:text-sage-light no-underline hover:underline">
           {categoryLabel(category)}
         </a>
       </div>

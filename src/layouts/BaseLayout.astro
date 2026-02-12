@@ -1,4 +1,6 @@
 ---
+import { url } from '../lib/utils';
+
 interface Props {
   title: string;
   description: string;
@@ -9,6 +11,9 @@ const { title, description, ogImage } = Astro.props;
 const siteName = 'The Clean Pantry';
 const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+const interFontUrl = url('/fonts/inter-variable.woff2');
+const literataFontUrl = url('/fonts/literata-variable.woff2');
 ---
 
 <!DOCTYPE html>
@@ -32,30 +37,30 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
 
-    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/literata-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={literataFontUrl} as="font" type="font/woff2" crossorigin />
 
-    <style is:inline>
+    <style define:vars={{ interFontUrl: `url('${interFontUrl}')`, literataFontUrl: `url('${literataFontUrl}')` }}>
       @font-face {
         font-family: 'Inter';
-        src: url('/fonts/inter-variable.woff2') format('woff2');
+        src: var(--interFontUrl) format('woff2');
         font-weight: 100 900;
         font-style: normal;
         font-display: swap;
       }
       @font-face {
         font-family: 'Literata';
-        src: url('/fonts/literata-variable.woff2') format('woff2');
+        src: var(--literataFontUrl) format('woff2');
         font-weight: 200 900;
         font-style: normal;
         font-display: swap;
       }
     </style>
 
-    <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
-    <script is:inline src="/pagefind/pagefind-ui.js"></script>
+    <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />
+    <script is:inline src={url('/pagefind/pagefind-ui.js')}></script>
 
     <script is:inline>
       const theme = localStorage.getItem('theme');

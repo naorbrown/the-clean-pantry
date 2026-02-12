@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
+import { url } from '../../lib/utils';
 
 const ingredients = await getCollection('ingredients');
 const core = ingredients.filter((i) => i.data.category === 'core');
@@ -34,7 +35,7 @@ const sectionConfig = [
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((ing) => (
-            <a href={`/ingredients/${ing.id}/`} class={`group block rounded-xl ${color} p-5 no-underline hover:shadow-[var(--shadow-card)] transition-all`}>
+            <a href={url(`/ingredients/${ing.id}/`)} class={`group block rounded-xl ${color} p-5 no-underline hover:shadow-[var(--shadow-card)] transition-all`}>
               <h3 class="font-serif font-semibold text-bark dark:text-dark-text group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors">
                 {ing.data.name}
               </h3>
