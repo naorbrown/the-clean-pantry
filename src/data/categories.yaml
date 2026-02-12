@@ -1,0 +1,125 @@
+kitchen:
+  name: "Kitchen Cleaning"
+  description: "All-purpose cleaners, degreasers, and oven solutions using simple pantry ingredients"
+  icon: "🍽️"
+  order: 1
+
+kitchen-food-contact:
+  name: "Kitchen & Food Contact"
+  description: "Non-toxic cookware, food storage, utensils, cutting boards, and water bottles"
+  icon: "🍳"
+  order: 2
+
+bathroom:
+  name: "Bathroom Cleaning"
+  description: "Toilet cleaners, tub scrubs, and glass sprays without harsh chemicals"
+  icon: "🚿"
+  order: 3
+
+personal-care:
+  name: "Personal Care"
+  description: "Simple deodorants, toothpaste, shampoo, and skincare from natural ingredients"
+  icon: "🧴"
+  order: 4
+
+beauty-cosmetics:
+  name: "Beauty & Cosmetics"
+  description: "Safer makeup choices, natural nail care, hair dye alternatives, and brush cleaning"
+  icon: "💄"
+  order: 5
+
+baby-child:
+  name: "Baby & Child"
+  description: "Extra-gentle cleaners safe for nurseries, toys, and sensitive skin"
+  icon: "👶"
+  order: 6
+
+laundry:
+  name: "Laundry"
+  description: "Gentle, effective detergents, stain removers, and fabric softeners"
+  icon: "👕"
+  order: 7
+
+floors:
+  name: "Floor Care"
+  description: "Safe cleaners for hardwood, tile, and carpet — with material-specific guidance"
+  icon: "🏠"
+  order: 8
+
+clothing-textiles:
+  name: "Clothing & Textiles"
+  description: "Healthier socks, house shoes, bedding, carpet materials, and fabric care"
+  icon: "🧶"
+  order: 9
+
+air-quality:
+  name: "Air Quality"
+  description: "Natural air freshening, ozonators, purifiers, and healthier indoor air"
+  icon: "🌬️"
+  order: 10
+
+candles-fragrance:
+  name: "Candles & Fragrance"
+  description: "Safer candle choices, DIY beeswax candles, and essential oil guidance"
+  icon: "🕯️"
+  order: 11
+
+water:
+  name: "Water"
+  description: "Shower filters, drinking water filtration, and water quality guidance"
+  icon: "💧"
+  order: 12
+
+home-setup:
+  name: "Home Setup"
+  description: "Mattress selection, natural lighting, ozonators, and healthier living spaces"
+  icon: "🔧"
+  order: 13
+
+pest-control:
+  name: "Pest Control"
+  description: "Non-toxic solutions for ants, fleas, mosquitoes, and other common household pests"
+  icon: "🐜"
+  order: 14
+
+pet-care:
+  name: "Pet Care"
+  description: "Natural pet shampoo, flea treatment, safe litter, bowls, and bedding"
+  icon: "🐾"
+  order: 15
+
+outdoor-garden:
+  name: "Outdoor & Garden"
+  description: "Lawn care, garden solutions, insect repellent, pool maintenance, and deck cleaning"
+  icon: "🌿"
+  order: 16
+
+car-care:
+  name: "Car Care"
+  description: "Non-toxic car interior cleaning, air fresheners, car wash, and off-gassing reduction"
+  icon: "🚗"
+  order: 17
+
+deep-cleaning:
+  name: "Deep Cleaning"
+  description: "Grout restoration, mold removal, rust treatment, adhesive removal, and garage cleaning"
+  icon: "🧽"
+  order: 18
+
+fitness-wellness:
+  name: "Fitness & Wellness"
+  description: "Yoga mat cleaner, gym equipment sanitizer, sports bottle care, and workout gear"
+  icon: "🏋️"
+  order: 19
+
+home-office:
+  name: "Home Office"
+  description: "Non-toxic desk, chair, keyboard, and monitor cleaning — safer workspace setup"
+  icon: "💻"
+  order: 20
+
+seasonal:
+  name: "Seasonal"
+  description: "Holiday candle safety, de-icing alternatives, spring cleaning checklists, and back-to-school"
+  icon: "🍂"
+  order: 21

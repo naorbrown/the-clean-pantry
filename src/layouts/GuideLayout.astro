@@ -1,0 +1,97 @@
+---
+import PageLayout from './PageLayout.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import CategoryIcon from '../components/ui/CategoryIcon.astro';
+import TableOfContents from '../components/ui/TableOfContents.astro';
+import RelatedContent from '../components/ui/RelatedContent.astro';
+import { categoryLabel } from '../lib/utils';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  guide: {
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      category: string;
+    };
+  };
+}
+
+const { guide } = Astro.props;
+const { title, description, category } = guide.data;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: categoryLabel(category), href: `/categories/${category}/` },
+  { label: title },
+];
+
+const allRecipes = await getCollection('recipes', ({ data }) => !data.draft && data.category === category);
+let allGuides: any[] = [];
+try { allGuides = await getCollection('guides', ({ data }) => !data.draft && data.category === category); } catch { /* empty */ }
+
+const relatedGuides = allGuides
+  .filter((g) => g.id !== guide.id)
+  .slice(0, 3)
+  .map((g) => ({
+    href: `/guides/${g.id}/`,
+    title: g.data.title,
+    description: g.data.description,
+    category: g.data.category,
+    type: 'guide' as const,
+  }));
+
+const relatedRecipes = allRecipes
+  .slice(0, 3)
+  .map((r) => ({
+    href: `/recipes/${r.id}/`,
+    title: r.data.title,
+    description: r.data.description,
+    category: r.data.category,
+    type: 'recipe' as const,
+    totalTime: r.data.totalTime,
+    difficulty: r.data.difficulty,
+    ingredientCount: r.data.ingredients.length,
+  }));
+
+const related = [...relatedGuides, ...relatedRecipes].slice(0, 6);
+---
+
+<PageLayout title={title} description={description}>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12" data-pagefind-body>
+    <Breadcrumb items={breadcrumbs} />
+
+    <!-- Header -->
+    <div class="mt-4 mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <CategoryIcon slug={category} size="sm" class="text-sage-dark dark:text-sage-light" />
+        <a href={`/categories/${category}/`} class="text-xs font-semibold uppercase tracking-wider text-sage-dark dark:text-sage-light no-underline hover:underline">
+          {categoryLabel(category)}
+        </a>
+      </div>
+      <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text mb-2">
+        {title}
+      </h1>
+      <p class="text-bark-light/80 dark:text-dark-text/70">{description}</p>
+    </div>
+
+    <!-- Two-column layout: TOC sidebar + content -->
+    <div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-10">
+      <!-- Sticky TOC sidebar -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24">
+          <TableOfContents />
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="prose prose-bark dark:prose-invert max-w-none min-w-0">
+        <slot />
+      </div>
+    </div>
+
+    <!-- Related content -->
+    <RelatedContent items={related} title={`More from ${categoryLabel(category)}`} />
+  </article>
+</PageLayout>

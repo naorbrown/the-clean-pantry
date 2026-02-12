@@ -1,0 +1,63 @@
+---
+---
+
+<nav id="toc" class="hidden lg:block" aria-label="Table of contents">
+  <p class="text-xs font-semibold uppercase tracking-wider text-bark-light/50 dark:text-dark-text/40 mb-3">
+    On this page
+  </p>
+  <ul id="toc-list" class="space-y-1.5 text-sm border-l border-cream-dark dark:border-dark-surface">
+  </ul>
+</nav>
+
+<script>
+  function buildToc() {
+    const article = document.querySelector('article');
+    const tocList = document.getElementById('toc-list');
+    const toc = document.getElementById('toc');
+    if (!article || !tocList || !toc) return;
+
+    const headings = article.querySelectorAll('h2');
+    if (headings.length < 2) {
+      toc.style.display = 'none';
+      return;
+    }
+
+    headings.forEach((heading, i) => {
+      if (!heading.id) {
+        heading.id = `section-${i}`;
+      }
+
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${heading.id}`;
+      a.textContent = heading.textContent || '';
+      a.className = 'block pl-3 py-0.5 -ml-px border-l-2 border-transparent text-bark-light/60 dark:text-dark-text/50 hover:text-sage-dark dark:hover:text-sage-light hover:border-sage transition-colors no-underline';
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // Highlight current section
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocList.querySelectorAll('a').forEach((a) => {
+              const isActive = a.getAttribute('href') === `#${id}`;
+              a.classList.toggle('border-sage', isActive);
+              a.classList.toggle('text-sage-dark', isActive);
+              a.classList.toggle('dark:text-sage-light', isActive);
+              a.classList.toggle('font-medium', isActive);
+              a.classList.toggle('border-transparent', !isActive);
+            });
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -60% 0px' }
+    );
+
+    headings.forEach((heading) => observer.observe(heading));
+  }
+
+  buildToc();
+</script>

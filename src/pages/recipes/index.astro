@@ -1,0 +1,44 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import ContentCard from '../../components/ui/ContentCard.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import CategoryStrip from '../../components/ui/CategoryStrip.astro';
+import { getCollection } from 'astro:content';
+import { getCategories } from '../../lib/utils';
+
+const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
+const categories = getCategories();
+---
+
+<PageLayout title="All Recipes" description="Browse all DIY natural home product recipes — simple, healthy, and effective.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <Breadcrumb items={[{ label: 'Recipes' }]} />
+    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text mt-4 mb-8">All Recipes</h1>
+    <div class="mb-8"><CategoryStrip categories={categories} /></div>
+
+    {categories.map((cat) => {
+      const catRecipes = allRecipes.filter((r) => r.data.category === cat.slug);
+      if (catRecipes.length === 0) return null;
+      return (
+        <section class="mb-12">
+          <SectionHeader title={cat.name} viewAllHref={`/categories/${cat.slug}/`} />
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {catRecipes.map((recipe) => (
+              <ContentCard
+                href={`/recipes/${recipe.id}/`}
+                title={recipe.data.title}
+                description={recipe.data.description}
+                category={recipe.data.category}
+                type="recipe"
+                totalTime={recipe.data.totalTime}
+                difficulty={recipe.data.difficulty}
+                ingredientCount={recipe.data.ingredients.length}
+              />
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+</PageLayout>

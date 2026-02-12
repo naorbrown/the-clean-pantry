@@ -1,0 +1,32 @@
+---
+import ContentCard from './ContentCard.astro';
+
+interface Props {
+  items: Array<{
+    href: string;
+    title: string;
+    description: string;
+    category: string;
+    type: 'recipe' | 'guide';
+    totalTime?: string;
+    difficulty?: string;
+    ingredientCount?: number;
+  }>;
+  title?: string;
+}
+
+const { items, title = 'Related content' } = Astro.props;
+
+if (items.length === 0) return;
+---
+
+<section class="mt-12 pt-8 border-t border-cream-dark dark:border-dark-surface">
+  <h2 class="font-serif text-lg font-semibold text-bark dark:text-dark-text mb-4">{title}</h2>
+  <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+    {items.slice(0, 6).map((item) => (
+      <div class="flex-none w-[280px] snap-start">
+        <ContentCard {...item} />
+      </div>
+    ))}
+  </div>
+</section>

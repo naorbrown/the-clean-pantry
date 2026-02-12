@@ -1,0 +1,30 @@
+---
+import CategoryIcon from './CategoryIcon.astro';
+
+interface Props {
+  categories: Array<{ slug: string; name: string; icon: string }>;
+  activeSlug?: string;
+}
+
+const { categories, activeSlug } = Astro.props;
+---
+
+<nav class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory sm:flex-wrap sm:overflow-visible sm:pb-0" aria-label="Categories">
+  {categories.map((cat) => {
+    const isActive = cat.slug === activeSlug;
+    return (
+      <a
+        href={`/categories/${cat.slug}/`}
+        class:list={[
+          'flex-none snap-start flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium no-underline whitespace-nowrap transition-all duration-150',
+          isActive
+            ? 'bg-sage text-white dark:bg-sage-dark dark:text-dark-text'
+            : 'bg-white dark:bg-dark-surface text-bark-light dark:text-dark-text/70 hover:bg-sage-light/30 dark:hover:bg-sage/10 shadow-[var(--shadow-card)]',
+        ]}
+      >
+        <CategoryIcon slug={cat.slug} size="sm" class={isActive ? 'text-white/80' : 'text-bark-light/40 dark:text-dark-text/40'} />
+        <span>{cat.name}</span>
+      </a>
+    );
+  })}
+</nav>

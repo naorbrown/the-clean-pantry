@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FAF8F5;
+  --color-cream-dark: #F0EDE8;
+  --color-bark: #3D2E1E;
+  --color-bark-light: #5C4A3A;
+  --color-sage: #7A9E7E;
+  --color-sage-dark: #5B7D5F;
+  --color-sage-light: #B8D4BA;
+  --color-terracotta: #C67B5C;
+  --color-terracotta-light: #E8A88E;
+  --color-honey: #D4A847;
+  --color-honey-light: #E8C96E;
+  --color-sky: #6BA3BE;
+  --color-sky-light: #A3D0E4;
+
+  --color-dark-bg: #1A1612;
+  --color-dark-surface: #2A2420;
+  --color-dark-elevated: #352E28;
+  --color-dark-text: #E8E2DC;
+
+  --font-sans: 'Inter', 'system-ui', sans-serif;
+  --font-serif: 'Literata', 'Georgia', serif;
+
+  --shadow-card: 0 1px 3px 0 rgb(61 46 30 / 0.06), 0 1px 2px -1px rgb(61 46 30 / 0.06);
+  --shadow-card-hover: 0 10px 15px -3px rgb(61 46 30 / 0.08), 0 4px 6px -4px rgb(61 46 30 / 0.06);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-bark);
+    background-color: var(--color-cream);
+  }
+
+  html.dark {
+    color: var(--color-dark-text);
+    background-color: var(--color-dark-bg);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--color-sage-dark);
+    text-decoration: underline;
+    text-decoration-color: var(--color-sage-light);
+    text-underline-offset: 2px;
+  }
+  a:hover {
+    color: var(--color-sage);
+    text-decoration-color: var(--color-sage);
+  }
+
+  .dark a {
+    color: var(--color-sage-light);
+    text-decoration-color: var(--color-sage);
+  }
+  .dark a:hover {
+    color: var(--color-sage);
+  }
+
+  /* Prose improvements */
+  .prose {
+    line-height: 1.75;
+  }
+}
+
+/* Pagefind overrides — default (inline in overlay) */
+:root {
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: var(--color-sage-dark);
+  --pagefind-ui-text: var(--color-bark);
+  --pagefind-ui-background: var(--color-cream);
+  --pagefind-ui-border: var(--color-cream-dark);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: var(--font-sans);
+}
+
+.dark {
+  --pagefind-ui-primary: var(--color-sage-light);
+  --pagefind-ui-text: var(--color-dark-text);
+  --pagefind-ui-background: var(--color-dark-surface);
+  --pagefind-ui-border: var(--color-dark-surface);
+}
+
+/* Hide scrollbar on horizontal scroll containers */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Search overlay dialog */
+dialog.search-overlay::backdrop {
+  background: rgb(61 46 30 / 0.5);
+  backdrop-filter: blur(4px);
+}
+.dark dialog.search-overlay::backdrop {
+  background: rgb(26 22 18 / 0.8);
+}
+
+/* Mobile menu dialog */
+dialog.mobile-menu::backdrop {
+  background: rgb(61 46 30 / 0.5);
+}
+.dark dialog.mobile-menu::backdrop {
+  background: rgb(26 22 18 / 0.8);
+}

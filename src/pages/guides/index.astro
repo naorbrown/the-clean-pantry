@@ -1,0 +1,45 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import GuideCard from '../../components/ui/GuideCard.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import CategoryStrip from '../../components/ui/CategoryStrip.astro';
+import { getCollection } from 'astro:content';
+import { getCategories } from '../../lib/utils';
+
+let allGuides: any[] = [];
+try { allGuides = await getCollection('guides', ({ data }) => !data.draft); } catch { /* empty */ }
+const categories = getCategories();
+---
+
+<PageLayout title="All Guides" description="Browse all guides and resources — expert knowledge for every room and situation.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <Breadcrumb items={[{ label: 'Guides' }]} />
+    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text mt-4 mb-8">All Guides</h1>
+    <div class="mb-8"><CategoryStrip categories={categories} /></div>
+
+    {categories.map((cat) => {
+      const catGuides = allGuides.filter((g) => g.data.category === cat.slug);
+      if (catGuides.length === 0) return null;
+      return (
+        <section class="mb-12">
+          <SectionHeader title={cat.name} viewAllHref={`/categories/${cat.slug}/`} />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {catGuides.map((guide) => (
+              <GuideCard
+                href={`/guides/${guide.id}/`}
+                title={guide.data.title}
+                description={guide.data.description}
+                category={guide.data.category}
+              />
+            ))}
+          </div>
+        </section>
+      );
+    })}
+
+    {allGuides.length === 0 && (
+      <p class="text-bark-light/60 dark:text-dark-text/50 text-center py-12">Guides coming soon.</p>
+    )}
+  </div>
+</PageLayout>

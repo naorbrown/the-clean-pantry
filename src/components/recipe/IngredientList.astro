@@ -1,0 +1,28 @@
+---
+interface Props {
+  ingredients: {
+    name: string;
+    amount: string;
+    notes?: string;
+  }[];
+}
+
+const { ingredients } = Astro.props;
+---
+
+<div class="ingredient-list">
+  <h2 class="font-serif text-xl font-semibold mb-4 text-bark dark:text-dark-text">Ingredients</h2>
+  <ul class="space-y-2">
+    {ingredients.map((ing) => (
+      <li class="flex items-start gap-3 py-1.5 border-b border-cream-dark/50 dark:border-dark-surface/50 last:border-0">
+        <span class="font-medium text-bark dark:text-dark-text min-w-[5rem] text-right text-sm">
+          {ing.amount}
+        </span>
+        <span class="text-bark-light dark:text-dark-text/80 text-sm">
+          {ing.name}
+          {ing.notes && <span class="text-bark-light/60 dark:text-dark-text/50"> ({ing.notes})</span>}
+        </span>
+      </li>
+    ))}
+  </ul>
+</div>

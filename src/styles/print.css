@@ -1,0 +1,42 @@
+@media print {
+  header, footer, nav, .no-print, .theme-toggle, .mobile-menu, .search-input, .breadcrumb {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .recipe-content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .recipe-sidebar {
+    break-before: avoid;
+  }
+
+  h1 {
+    font-size: 18pt;
+    margin-bottom: 8pt;
+  }
+
+  h2 {
+    font-size: 14pt;
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+  }
+
+  .ingredient-list, .recipe-steps {
+    break-inside: avoid;
+  }
+}

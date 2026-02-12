@@ -1,0 +1,64 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import ContentCard from '../../components/ui/ContentCard.astro';
+import GuideCard from '../../components/ui/GuideCard.astro';
+import CategoryIcon from '../../components/ui/CategoryIcon.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import { getCollection } from 'astro:content';
+import { getCategories, categoryLabel } from '../../lib/utils';
+
+export function getStaticPaths() {
+  return getCategories().map((cat) => ({
+    params: { category: cat.slug },
+    props: { category: cat.slug, description: cat.description },
+  }));
+}
+
+const { category, description } = Astro.props;
+const recipes = await getCollection('recipes', ({ data }) => !data.draft && data.category === category);
+let guides: any[] = [];
+try { guides = await getCollection('guides', ({ data }) => !data.draft && data.category === category); } catch { /* empty */ }
+---
+
+<PageLayout title={categoryLabel(category)} description={description}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <Breadcrumb items={[{ label: 'Categories', href: '/categories/' }, { label: categoryLabel(category) }]} />
+
+    <div class="flex items-start gap-4 mt-4 mb-8">
+      <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center">
+        <CategoryIcon slug={category} size="lg" class="text-sage-dark dark:text-sage-light" />
+      </div>
+      <div>
+        <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">{categoryLabel(category)}</h1>
+        <p class="text-bark-light/70 dark:text-dark-text/60 mt-1">{description}</p>
+      </div>
+    </div>
+
+    {recipes.length > 0 && (
+      <section class="mb-12">
+        <SectionHeader title="Recipes" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {recipes.map((recipe) => (
+            <ContentCard href={`/recipes/${recipe.id}/`} title={recipe.data.title} description={recipe.data.description} category={recipe.data.category} type="recipe" totalTime={recipe.data.totalTime} difficulty={recipe.data.difficulty} ingredientCount={recipe.data.ingredients.length} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {guides.length > 0 && (
+      <section class="mb-12">
+        <SectionHeader title="Guides" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {guides.map((guide) => (
+            <GuideCard href={`/guides/${guide.id}/`} title={guide.data.title} description={guide.data.description} category={guide.data.category} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {recipes.length === 0 && guides.length === 0 && (
+      <p class="text-bark-light/60 dark:text-dark-text/50 text-center py-12">Content coming soon for this category.</p>
+    )}
+  </div>
+</PageLayout>

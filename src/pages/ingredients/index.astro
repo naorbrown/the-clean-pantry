@@ -1,0 +1,48 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { getCollection } from 'astro:content';
+
+const ingredients = await getCollection('ingredients');
+const core = ingredients.filter((i) => i.data.category === 'core');
+const secondary = ingredients.filter((i) => i.data.category === 'secondary');
+const specialty = ingredients.filter((i) => i.data.category === 'specialty');
+
+const sectionConfig = [
+  { items: core, title: 'Core', subtitle: 'The essentials that handle 90% of household needs', color: 'bg-sage/10 dark:bg-sage/5', accent: 'text-sage-dark dark:text-sage-light' },
+  { items: secondary, title: 'Secondary', subtitle: 'Useful additions for specific tasks', color: 'bg-honey/10 dark:bg-honey/5', accent: 'text-honey-dark dark:text-honey' },
+  { items: specialty, title: 'Specialty', subtitle: 'For particular use cases and advanced recipes', color: 'bg-terracotta-light/10 dark:bg-terracotta/5', accent: 'text-terracotta dark:text-terracotta-light' },
+];
+---
+
+<PageLayout title="Ingredients" description="The essential ingredients for DIY natural home products — everything you need to know.">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <Breadcrumb items={[{ label: 'Ingredients' }]} />
+
+    <div class="mt-4 mb-10">
+      <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">The Pantry</h1>
+      <p class="text-bark-light/70 dark:text-dark-text/60 mt-2 max-w-2xl">
+        Everything you need to replace toxic household products — from the four essentials to specialty items.
+      </p>
+    </div>
+
+    {sectionConfig.map(({ items, title, subtitle, color, accent }) => items.length > 0 && (
+      <section class="mb-12">
+        <div class="mb-5">
+          <h2 class={`font-serif text-xl font-semibold ${accent}`}>{title}</h2>
+          <p class="text-sm text-bark-light/60 dark:text-dark-text/50 mt-0.5">{subtitle}</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {items.map((ing) => (
+            <a href={`/ingredients/${ing.id}/`} class={`group block rounded-xl ${color} p-5 no-underline hover:shadow-[var(--shadow-card)] transition-all`}>
+              <h3 class="font-serif font-semibold text-bark dark:text-dark-text group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors">
+                {ing.data.name}
+              </h3>
+              <p class="text-sm text-bark-light/70 dark:text-dark-text/60 mt-1 line-clamp-2">{ing.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</PageLayout>

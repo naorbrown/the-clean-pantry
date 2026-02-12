@@ -1,0 +1,58 @@
+---
+import { getCategories } from '../../lib/utils';
+
+const categories = getCategories().slice(0, 8);
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-cream-dark/50 dark:bg-dark-surface/50 border-t border-cream-dark dark:border-dark-surface mt-auto">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
+          The Clean Pantry
+        </a>
+        <p class="text-sm text-bark-light/60 dark:text-dark-text/50 mt-2 max-w-xs">
+          Simple, non-toxic recipes and guides for your entire home. Made with common pantry ingredients.
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-bark-light/40 dark:text-dark-text/30 mb-3">
+          Explore
+        </p>
+        <ul class="space-y-2">
+          <li><a href="/recipes/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">All Recipes</a></li>
+          <li><a href="/guides/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">All Guides</a></li>
+          <li><a href="/ingredients/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Ingredients</a></li>
+          <li><a href="/categories/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Categories</a></li>
+          <li><a href="/about/" class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">About</a></li>
+        </ul>
+      </div>
+
+      <!-- Top categories -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-bark-light/40 dark:text-dark-text/30 mb-3">
+          Top Categories
+        </p>
+        <ul class="space-y-2">
+          {categories.map((cat) => (
+            <li>
+              <a href={`/categories/${cat.slug}/`} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">
+                {cat.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-cream-dark/60 dark:border-dark-surface/60 text-center">
+      <p class="text-xs text-bark-light/40 dark:text-dark-text/30">
+        &copy; {year} The Clean Pantry. Made with simple ingredients.
+      </p>
+    </div>
+  </div>
+</footer>

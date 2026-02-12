@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  viewAllHref?: string;
+  viewAllLabel?: string;
+}
+
+const { title, viewAllHref, viewAllLabel = 'View all' } = Astro.props;
+---
+
+<div class="flex items-baseline justify-between gap-4 mb-6">
+  <h2 class="font-serif text-xl sm:text-2xl font-semibold text-bark dark:text-dark-text">
+    {title}
+  </h2>
+  {viewAllHref && (
+    <a
+      href={viewAllHref}
+      class="text-sm font-medium text-sage-dark dark:text-sage-light no-underline hover:text-sage dark:hover:text-sage whitespace-nowrap transition-colors"
+    >
+      {viewAllLabel} &rarr;
+    </a>
+  )}
+</div>

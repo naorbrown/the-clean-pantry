@@ -1,0 +1,33 @@
+---
+import CategoryIcon from './CategoryIcon.astro';
+import { categoryLabel } from '../../lib/utils';
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  category: string;
+}
+
+const { href, title, description, category } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group flex gap-4 p-4 sm:p-5 rounded-xl bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-200 no-underline border-l-4 border-sage dark:border-sage-dark"
+>
+  <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center">
+    <CategoryIcon slug={category} size="sm" class="text-sage-dark dark:text-sage-light" />
+  </div>
+  <div class="min-w-0 flex-1">
+    <p class="text-[10px] font-semibold uppercase tracking-wider text-sage-dark/70 dark:text-sage-light/60 mb-0.5">
+      {categoryLabel(category)} &middot; Guide
+    </p>
+    <h3 class="font-serif text-base font-semibold text-bark dark:text-dark-text group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors line-clamp-1">
+      {title}
+    </h3>
+    <p class="text-sm text-bark-light/70 dark:text-dark-text/60 mt-1 line-clamp-2">
+      {description}
+    </p>
+  </div>
+</a>

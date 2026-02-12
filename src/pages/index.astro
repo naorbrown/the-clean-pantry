@@ -1,0 +1,111 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import CategoryStrip from '../components/ui/CategoryStrip.astro';
+import ContentCard from '../components/ui/ContentCard.astro';
+import GuideCard from '../components/ui/GuideCard.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import CategoryIcon from '../components/ui/CategoryIcon.astro';
+import { getCategories } from '../lib/utils';
+import { getCollection } from 'astro:content';
+
+const categories = getCategories();
+const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
+const featuredRecipes = allRecipes.filter((r) => r.data.featured);
+const displayRecipes = featuredRecipes.length >= 3 ? featuredRecipes.slice(0, 6) : allRecipes.slice(0, 6);
+
+let allGuides: any[] = [];
+try { allGuides = await getCollection('guides', ({ data }) => !data.draft); } catch { /* empty */ }
+const latestGuides = allGuides.slice(0, 4);
+
+const coreIngredients = (await getCollection('ingredients')).filter((i) => i.data.category === 'core');
+---
+
+<PageLayout title="The Clean Pantry" description="Simple, non-toxic recipes and guides for your entire home — from kitchen to garden, waking to sleeping.">
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-cream to-cream-dark/40 dark:from-dark-bg dark:to-dark-surface/40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-bark dark:text-dark-text leading-tight">
+        The Clean Pantry
+      </h1>
+      <p class="text-lg sm:text-xl text-bark-light/80 dark:text-dark-text/70 mt-4 max-w-2xl mx-auto">
+        Simple, non-toxic recipes and guides for your entire home. Replace every toxic product with something better.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
+        <a href="/recipes/" class="inline-flex items-center px-5 py-2.5 bg-sage text-white rounded-lg font-medium text-sm no-underline hover:bg-sage-dark transition-colors">
+          Browse Recipes
+        </a>
+        <a href="/ingredients/" class="inline-flex items-center px-5 py-2.5 bg-white dark:bg-dark-surface text-bark dark:text-dark-text rounded-lg font-medium text-sm no-underline shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all">
+          Explore Ingredients
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Strip -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <CategoryStrip categories={categories} />
+  </section>
+
+  <!-- Recipes -->
+  {displayRecipes.length > 0 && (
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-12">
+      <SectionHeader title="Recipes" viewAllHref="/recipes/" viewAllLabel="View all recipes" />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {displayRecipes.map((recipe) => (
+          <ContentCard
+            href={`/recipes/${recipe.id}/`}
+            title={recipe.data.title}
+            description={recipe.data.description}
+            category={recipe.data.category}
+            type="recipe"
+            totalTime={recipe.data.totalTime}
+            difficulty={recipe.data.difficulty}
+            ingredientCount={recipe.data.ingredients.length}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Guides -->
+  {latestGuides.length > 0 && (
+    <section class="bg-cream-dark/30 dark:bg-dark-surface/30 py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <SectionHeader title="Guides & Resources" viewAllHref="/guides/" viewAllLabel="View all guides" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {latestGuides.map((guide) => (
+            <GuideCard href={`/guides/${guide.id}/`} title={guide.data.title} description={guide.data.description} category={guide.data.category} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Ingredients CTA -->
+  {coreIngredients.length > 0 && (
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="bg-sage-light/10 dark:bg-sage/5 rounded-2xl p-6 sm:p-10">
+        <div class="text-center mb-8">
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">The Core Ingredients</h2>
+          <p class="text-bark-light/70 dark:text-dark-text/60 mt-2 max-w-lg mx-auto">
+            Just a few simple pantry staples handle the vast majority of household cleaning needs.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {coreIngredients.map((ing) => (
+            <a href={`/ingredients/${ing.id}/`} class="group flex flex-col items-center text-center p-4 rounded-xl bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline">
+              <div class="w-10 h-10 rounded-full bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center mb-2">
+                <CategoryIcon slug="kitchen" size="sm" class="text-sage-dark dark:text-sage-light" />
+              </div>
+              <span class="font-serif font-semibold text-sm text-bark dark:text-dark-text group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors">{ing.data.name}</span>
+              <span class="text-xs text-bark-light/50 dark:text-dark-text/40 mt-0.5 line-clamp-2">{ing.data.description}</span>
+            </a>
+          ))}
+        </div>
+        <div class="text-center mt-6">
+          <a href="/ingredients/" class="text-sm font-medium text-sage-dark dark:text-sage-light no-underline hover:text-sage transition-colors">Explore all ingredients &rarr;</a>
+        </div>
+      </div>
+    </section>
+  )}
+</PageLayout>
