@@ -11,7 +11,7 @@ const { ingredients } = Astro.props;
 ---
 
 <div class="ingredient-list">
-  <h2 class="font-serif text-xl font-semibold mb-4 text-bark dark:text-dark-text">Ingredients</h2>
+  <h2 class="text-xl font-semibold mb-4 text-bark dark:text-dark-text">Ingredients</h2>
   <ul class="space-y-2">
     {ingredients.map((ing) => (
       <li class="flex items-start gap-3 py-1.5 border-b border-cream-dark/50 dark:border-dark-surface/50 last:border-0">

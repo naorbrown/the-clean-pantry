@@ -177,7 +177,46 @@ const sizeClass = sizeMap[size];
       <circle cx="12" cy="12" r="4" />
     </Fragment>
   )}
-  {!['kitchen','kitchen-food-contact','bathroom','personal-care','beauty-cosmetics','baby-child','laundry','floors','clothing-textiles','air-quality','candles-fragrance','water','home-setup','pest-control','pet-care','outdoor-garden','car-care','deep-cleaning','fitness-wellness','home-office','seasonal'].includes(slug) && (
+  {slug === 'entertaining' && (
+    <Fragment>
+      <path d="M8 22l4-18h0l4 18" />
+      <path d="M6 22h12" />
+      <circle cx="12" cy="4" r="0" />
+      <path d="M8 10c0-4 1.5-6 4-6s4 2 4 6" />
+      <path d="M7 10h10" />
+    </Fragment>
+  )}
+  {slug === 'sleep-wellness' && (
+    <Fragment>
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+      <path d="M14 5l1 1" />
+      <path d="M18 8l1 1" />
+      <path d="M16 3l.5.5" />
+    </Fragment>
+  )}
+  {slug === 'daily-habits' && (
+    <Fragment>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M9 7h6" />
+      <path d="M9 11h6" />
+      <path d="M9 15h4" />
+      <path d="M5 7h-1" />
+      <path d="M5 11h-1" />
+      <path d="M5 15h-1" />
+    </Fragment>
+  )}
+  {slug === 'elderly-accessibility' && (
+    <Fragment>
+      <circle cx="12" cy="5" r="2" />
+      <path d="M12 7v5" />
+      <path d="M8 10h8" />
+      <path d="M9 12l-2 9" />
+      <path d="M15 12l2 9" />
+      <path d="M6 21h4" />
+      <path d="M14 21h4" />
+    </Fragment>
+  )}
+  {!['kitchen','kitchen-food-contact','bathroom','personal-care','beauty-cosmetics','baby-child','laundry','floors','clothing-textiles','air-quality','candles-fragrance','water','home-setup','pest-control','pet-care','outdoor-garden','car-care','deep-cleaning','fitness-wellness','home-office','seasonal','entertaining','sleep-wellness','daily-habits','elderly-accessibility'].includes(slug) && (
     <Fragment>
       <rect x="4" y="4" width="16" height="16" rx="2" />
       <line x1="9" y1="9" x2="15" y2="9" />

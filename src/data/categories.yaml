@@ -29,8 +29,8 @@ beauty-cosmetics:
   order: 5
 
 baby-child:
-  name: "Baby & Child"
-  description: "Extra-gentle cleaners safe for nurseries, toys, and sensitive skin"
+  name: "Baby, Child & Teen"
+  description: "Extra-gentle cleaners for nurseries, toys, teen gear, and sensitive skin"
   icon: "👶"
   order: 6
 
@@ -123,3 +123,27 @@ seasonal:
   description: "Holiday candle safety, de-icing alternatives, spring cleaning checklists, and back-to-school"
   icon: "🍂"
   order: 21
+
+entertaining:
+  name: "Entertaining & Guests"
+  description: "Hosting prep, dinner parties, guest bedrooms, and after-party cleanup"
+  icon: "🥂"
+  order: 22
+
+sleep-wellness:
+  name: "Sleep & Wellness"
+  description: "EMF reduction, circadian rhythms, bedroom plants, window treatments, and sleep optimization"
+  icon: "🌙"
+  order: 23
+
+daily-habits:
+  name: "Daily Habits"
+  description: "Shoe policies, medicine storage, receipt handling, and overlooked household best practices"
+  icon: "📋"
+  order: 24
+
+elderly-accessibility:
+  name: "Elderly & Accessibility"
+  description: "Grab bars, non-slip solutions, medication management, and elder-proofing your home"
+  icon: "♿"
+  order: 25

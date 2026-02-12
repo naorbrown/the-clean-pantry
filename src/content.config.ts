@@ -24,6 +24,10 @@ const categoryEnum = z.enum([
   'fitness-wellness',
   'home-office',
   'seasonal',
+  'entertaining',
+  'sleep-wellness',
+  'daily-habits',
+  'elderly-accessibility',
 ]);
 
 const recipes = defineCollection({

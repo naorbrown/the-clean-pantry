@@ -12,7 +12,7 @@ const superCategories = getSuperCategories();
 <PageLayout title="All Recipes" description="Browse all DIY natural home product recipes — simple, healthy, and effective.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Recipes' }]} />
-    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">All Recipes</h1>
+    <h1 class="text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">All Recipes</h1>
     <p class="text-dark-text/60 mb-10">Every recipe, grouped by category. Pick one and get mixing.</p>
 
     {superCategories.map((sc) => {
@@ -22,7 +22,7 @@ const superCategories = getSuperCategories();
         <div class="mb-14">
           <div class="flex items-center gap-2 mb-6">
             <span class="text-xl">{sc.icon}</span>
-            <h2 class="font-serif text-xl font-semibold text-dark-text">{sc.name}</h2>
+            <h2 class="text-xl font-semibold text-dark-text">{sc.name}</h2>
           </div>
           {sc.subcategories.map((subSlug) => {
             const subRecipes = scRecipes.filter((r) => r.data.category === subSlug);
@@ -30,7 +30,7 @@ const superCategories = getSuperCategories();
             return (
               <section class="mb-8 ml-2">
                 <div class="flex items-center justify-between mb-4">
-                  <h3 class="font-serif text-lg font-medium text-dark-text/80">{categoryLabel(subSlug)}</h3>
+                  <h3 class="text-lg font-medium text-dark-text/80">{categoryLabel(subSlug)}</h3>
                   <a href={url(`/categories/${subSlug}/`)} class="text-xs text-sage-light no-underline hover:text-sage">View all &rarr;</a>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
