@@ -37,6 +37,10 @@ const gradientMap: Record<string, string> = {
   'fitness-wellness':     'from-sky/20 to-sage/10',
   'home-office':          'from-sky-light/20 to-dark-elevated/30',
   seasonal:               'from-terracotta-light/20 to-honey-light/10',
+  entertaining:           'from-honey/20 to-terracotta/10',
+  'sleep-wellness':       'from-sky-light/20 to-sage/10',
+  'daily-habits':         'from-sage-light/20 to-honey-light/10',
+  'elderly-accessibility':'from-terracotta-light/20 to-sky-light/10',
 };
 
 const gradient = gradientMap[category] || 'from-sage-light/20 to-dark-elevated/30';
@@ -65,6 +69,10 @@ const illustrationMap: Record<string, IllustrationVariant> = {
   'fitness-wellness':     'drops',
   'home-office':          'spray',
   seasonal:               'lemon',
+  entertaining:           'mortar',
+  'sleep-wellness':       'herbs',
+  'daily-habits':         'soap',
+  'elderly-accessibility':'drops',
 };
 
 const illustration = illustrationMap[category] || 'leaf';
@@ -95,7 +103,7 @@ const emoji = getCategoryIcon(category);
     <p class="text-[11px] font-medium uppercase tracking-wider text-sage-light mb-1">
       {emoji} {categoryLabel(category)}
     </p>
-    <h3 class="font-serif text-base sm:text-lg font-semibold text-dark-text line-clamp-2 group-hover:text-sage-light transition-colors">
+    <h3 class="text-base sm:text-lg font-medium text-dark-text line-clamp-2 group-hover:text-sage-light transition-colors">
       {title}
     </h3>
     <p class="text-sm text-dark-text/60 mt-1.5 line-clamp-2">

@@ -35,7 +35,7 @@ try { guides = await getCollection('guides', ({ data }) => !data.draft && data.c
         <CategoryIcon slug={category} size="lg" class="text-sage-dark dark:text-sage-light" />
       </div>
       <div>
-        <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">{categoryLabel(category)}</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text">{categoryLabel(category)}</h1>
         <p class="text-bark-light/70 dark:text-dark-text/60 mt-1">{description}</p>
       </div>
     </div>

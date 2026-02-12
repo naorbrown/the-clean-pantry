@@ -23,7 +23,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
         <div class="flex justify-center mb-6">
           <BrandIllustration variant="leaf" class="w-16 h-16 text-sage-light/60" />
         </div>
-        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-text leading-[1.15]">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-text leading-[1.15]">
           Replace toxic products with <span class="text-sage-light">simple, safe</span> alternatives
         </h1>
         <p class="text-lg sm:text-xl text-dark-text/70 mt-5 max-w-2xl mx-auto leading-relaxed">
@@ -43,27 +43,27 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
 
   <!-- How it works -->
   <section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text text-center mb-10">How it works</h2>
+    <h2 class="text-2xl sm:text-3xl font-bold text-dark-text text-center mb-10">How it works</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
       <div class="text-center">
         <div class="w-14 h-14 mx-auto rounded-2xl bg-sage/10 flex items-center justify-center mb-4">
           <BrandIllustration variant="leaf" class="w-8 h-8 text-sage-light" />
         </div>
-        <h3 class="font-serif font-semibold text-dark-text mb-1">Pick a recipe</h3>
+        <h3 class="font-medium text-dark-text mb-1">Pick a recipe</h3>
         <p class="text-sm text-dark-text/60">Browse by room, task, or ingredient — there's a recipe for everything.</p>
       </div>
       <div class="text-center">
         <div class="w-14 h-14 mx-auto rounded-2xl bg-honey/10 flex items-center justify-center mb-4">
           <BrandIllustration variant="bottle" class="w-8 h-8 text-honey" />
         </div>
-        <h3 class="font-serif font-semibold text-dark-text mb-1">Grab ingredients</h3>
+        <h3 class="font-medium text-dark-text mb-1">Grab ingredients</h3>
         <p class="text-sm text-dark-text/60">Most recipes use just 2–4 pantry staples you already have at home.</p>
       </div>
       <div class="text-center">
         <div class="w-14 h-14 mx-auto rounded-2xl bg-terracotta/10 flex items-center justify-center mb-4">
           <BrandIllustration variant="mortar" class="w-8 h-8 text-terracotta-light" />
         </div>
-        <h3 class="font-serif font-semibold text-dark-text mb-1">Mix and use</h3>
+        <h3 class="font-medium text-dark-text mb-1">Mix and use</h3>
         <p class="text-sm text-dark-text/60">Follow the steps, mix it up, and enjoy a cleaner, healthier home.</p>
       </div>
     </div>
@@ -72,7 +72,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
   <!-- The Core Four Ingredients -->
   {coreIngredients.length > 0 && (
     <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text text-center mb-3">The Core Four Ingredients</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-dark-text text-center mb-3">The Core Four Ingredients</h2>
       <p class="text-dark-text/60 text-center mb-8 max-w-xl mx-auto">These four pantry staples handle 90% of your household cleaning needs.</p>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {coreIngredients.map((ing) => (
@@ -80,7 +80,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
             <div class="w-12 h-12 rounded-xl bg-sage/10 flex items-center justify-center mb-3 group-hover:bg-sage/15 transition-colors">
               <BrandIllustration variant="bottle" class="w-7 h-7 text-sage-light/70 group-hover:text-sage-light transition-colors" />
             </div>
-            <h3 class="font-serif text-sm font-semibold text-dark-text group-hover:text-sage-light transition-colors">{ing.data.name}</h3>
+            <h3 class="text-sm font-medium text-dark-text group-hover:text-sage-light transition-colors">{ing.data.name}</h3>
           </a>
         ))}
       </div>
@@ -89,7 +89,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
 
   <!-- 6 Super-Categories -->
   <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text text-center mb-10">Browse by Category</h2>
+    <h2 class="text-2xl sm:text-3xl font-bold text-dark-text text-center mb-10">Browse by Category</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
       {superCategories.map((sc) => (
         <a
@@ -97,7 +97,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
           class="group flex flex-col items-center text-center p-5 sm:p-6 rounded-xl bg-dark-surface hover:bg-dark-elevated shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline"
         >
           <span class="text-3xl mb-3">{sc.icon}</span>
-          <h3 class="font-serif text-sm sm:text-base font-semibold text-dark-text group-hover:text-sage-light transition-colors">{sc.name}</h3>
+          <h3 class="text-sm sm:text-base font-medium text-dark-text group-hover:text-sage-light transition-colors">{sc.name}</h3>
           <p class="text-xs text-dark-text/50 mt-1 line-clamp-2 hidden sm:block">{sc.description}</p>
         </a>
       ))}
@@ -108,7 +108,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
   {displayRecipes.length > 0 && (
     <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text">Popular Recipes</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold text-dark-text">Popular Recipes</h2>
         <a href={url('/recipes/')} class="text-sm font-medium text-sage-light no-underline hover:text-sage transition-colors">View all &rarr;</a>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

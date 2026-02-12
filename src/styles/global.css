@@ -2,14 +2,14 @@
 
 @theme {
   /* Dark-only palette: warm charcoal base with cream text */
-  --color-cream: #1C1917;
-  --color-cream-dark: #292524;
+  --color-cream: #1F1C1A;
+  --color-cream-dark: #2C2927;
   --color-bark: #F5F0EB;
   --color-bark-light: #D4CCC4;
-  --color-sage: #7A9E7E;
+  --color-sage: #7FA383;
   --color-sage-dark: #8DB891;
   --color-sage-light: #B8D4BA;
-  --color-terracotta: #D4907A;
+  --color-terracotta: #D49580;
   --color-terracotta-light: #E8A88E;
   --color-honey: #D4A847;
   --color-honey-light: #E8C96E;
@@ -17,16 +17,15 @@
   --color-sky-light: #A3D0E4;
   --color-honey-dark: #B89530;
 
-  --color-dark-bg: #1C1917;
-  --color-dark-surface: #292524;
-  --color-dark-elevated: #3D3533;
-  --color-dark-text: #F5F0EB;
+  --color-dark-bg: #1F1C1A;
+  --color-dark-surface: #2C2927;
+  --color-dark-elevated: #3F3836;
+  --color-dark-text: #E8E3DE;
 
   --font-sans: 'Inter', 'system-ui', sans-serif;
-  --font-serif: 'Literata', 'Georgia', serif;
 
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.15);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.12), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+  --shadow-card-hover: 0 8px 12px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 @layer base {
@@ -38,8 +37,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-weight: 500;
   }
 
   a {

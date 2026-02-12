@@ -13,7 +13,6 @@ const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 const interFontUrl = url('/fonts/inter-variable.woff2');
-const literataFontUrl = url('/fonts/literata-variable.woff2');
 ---
 
 <!DOCTYPE html>
@@ -40,20 +39,12 @@ const literataFontUrl = url('/fonts/literata-variable.woff2');
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
 
     <link rel="preload" href={interFontUrl} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={literataFontUrl} as="font" type="font/woff2" crossorigin />
 
-    <style define:vars={{ interFontUrl: `url('${interFontUrl}')`, literataFontUrl: `url('${literataFontUrl}')` }}>
+    <style define:vars={{ interFontUrl: `url('${interFontUrl}')` }}>
       @font-face {
         font-family: 'Inter';
         src: var(--interFontUrl) format('woff2');
         font-weight: 100 900;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'Literata';
-        src: var(--literataFontUrl) format('woff2');
-        font-weight: 200 900;
         font-style: normal;
         font-display: swap;
       }

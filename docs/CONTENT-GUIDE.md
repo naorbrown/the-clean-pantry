@@ -43,13 +43,17 @@ Every recipe should follow this structure in the body (after the frontmatter):
 | `laundry` | Laundry | Detergent, stain treatment, softener |
 | `floors` | Floor Care | Mop solutions, carpet care |
 | `personal-care` | Personal Care | Deodorant, toothpaste, shampoo |
-| `baby-child` | Baby & Child | Nursery, toy, and gentle cleaners |
+| `baby-child` | Baby, Child & Teen | Nursery, toys, teen gear, and gentle cleaners |
 | `pest-control` | Pest Control | Ant, flea, insect solutions |
 | `air-quality` | Air Quality | Room sprays, odor eliminators, air purification |
 | `candles-fragrance` | Candles & Fragrance | DIY candles, wax melts, scent blends |
 | `clothing-textiles` | Clothing & Textiles | Fabric care, wool wash, garment freshening |
 | `water` | Water | Filtration, softening, testing |
 | `home-setup` | Home Setup | Guides for home environment, lighting, EMF, mattress |
+| `entertaining` | Entertaining & Guests | Hosting prep, dinner parties, guest bedrooms, cleanup |
+| `sleep-wellness` | Sleep & Wellness | EMF, circadian rhythms, bedroom plants, sleep optimization |
+| `daily-habits` | Daily Habits | Shoe policies, medicine storage, receipt handling |
+| `elderly-accessibility` | Elderly & Accessibility | Grab bars, non-slip, medication management |
 
 ## Guide Body Structure
 

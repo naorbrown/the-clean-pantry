@@ -33,7 +33,7 @@ const sectionConfig = [
     <Breadcrumb items={[{ label: 'Ingredients' }]} />
 
     <div class="mt-4 mb-10">
-      <h1 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text">The Pantry</h1>
+      <h1 class="text-2xl sm:text-3xl font-bold text-dark-text">The Pantry</h1>
       <p class="text-dark-text/60 mt-2 max-w-2xl">
         Everything you need to replace toxic household products — from the four essentials to specialty items.
       </p>
@@ -42,7 +42,7 @@ const sectionConfig = [
     {sectionConfig.map(({ items, title, subtitle, color, accent, border }) => items.length > 0 && (
       <section class="mb-12">
         <div class="mb-5">
-          <h2 class={`font-serif text-xl font-semibold ${accent}`}>{title}</h2>
+          <h2 class={`text-xl font-semibold ${accent}`}>{title}</h2>
           <p class="text-sm text-dark-text/50 mt-0.5">{subtitle}</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -52,7 +52,7 @@ const sectionConfig = [
                 <BrandIllustration variant={ingredientIllustration[ing.id] || 'leaf'} class={`w-6 h-6 ${accent}/60 group-hover:${accent} transition-colors`} />
               </div>
               <div class="min-w-0">
-                <h3 class="font-serif font-semibold text-dark-text group-hover:text-sage-light transition-colors">
+                <h3 class="font-medium text-dark-text group-hover:text-sage-light transition-colors">
                   {ing.data.name}
                 </h3>
                 <p class="text-sm text-dark-text/60 mt-1 line-clamp-2">{ing.data.description}</p>

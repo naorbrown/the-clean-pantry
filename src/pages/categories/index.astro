@@ -10,7 +10,7 @@ const superCategories = getSuperCategories();
 <PageLayout title="Categories" description="Browse all categories — organized into six groups for easy navigation.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Categories' }]} />
-    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">Categories</h1>
+    <h1 class="text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">Categories</h1>
     <p class="text-dark-text/60 mb-10 max-w-2xl">Browse recipes and guides organized into six groups. Pick a category to explore.</p>
 
     <div class="space-y-10">
@@ -19,7 +19,7 @@ const superCategories = getSuperCategories();
           <div class="flex items-center gap-3 mb-4">
             <span class="text-2xl">{sc.icon}</span>
             <div>
-              <h2 class="font-serif text-xl font-semibold text-dark-text">{sc.name}</h2>
+              <h2 class="text-xl font-semibold text-dark-text">{sc.name}</h2>
               <p class="text-sm text-dark-text/50">{sc.description}</p>
             </div>
           </div>

@@ -36,13 +36,13 @@ describe('formatDuration', () => {
 });
 
 describe('categoryLabel', () => {
-  it('returns label for all 21 categories', () => {
+  it('returns label for all 25 categories', () => {
     expect(categoryLabel('kitchen')).toBe('Kitchen Cleaning');
     expect(categoryLabel('kitchen-food-contact')).toBe('Kitchen & Food Contact');
     expect(categoryLabel('bathroom')).toBe('Bathroom Cleaning');
     expect(categoryLabel('personal-care')).toBe('Personal Care');
     expect(categoryLabel('beauty-cosmetics')).toBe('Beauty & Cosmetics');
-    expect(categoryLabel('baby-child')).toBe('Baby & Child');
+    expect(categoryLabel('baby-child')).toBe('Baby, Child & Teen');
     expect(categoryLabel('laundry')).toBe('Laundry');
     expect(categoryLabel('floors')).toBe('Floor Care');
     expect(categoryLabel('clothing-textiles')).toBe('Clothing & Textiles');
@@ -58,6 +58,10 @@ describe('categoryLabel', () => {
     expect(categoryLabel('fitness-wellness')).toBe('Fitness & Wellness');
     expect(categoryLabel('home-office')).toBe('Home Office');
     expect(categoryLabel('seasonal')).toBe('Seasonal');
+    expect(categoryLabel('entertaining')).toBe('Entertaining & Guests');
+    expect(categoryLabel('sleep-wellness')).toBe('Sleep & Wellness');
+    expect(categoryLabel('daily-habits')).toBe('Daily Habits');
+    expect(categoryLabel('elderly-accessibility')).toBe('Elderly & Accessibility');
   });
 
   it('returns slug for unknown category', () => {
@@ -78,11 +82,11 @@ describe('getCategoryIcon', () => {
 });
 
 describe('getCategories', () => {
-  it('returns all 21 categories sorted by order', () => {
+  it('returns all 25 categories sorted by order', () => {
     const cats = getCategories();
-    expect(cats).toHaveLength(21);
+    expect(cats).toHaveLength(25);
     expect(cats[0].slug).toBe('kitchen');
-    expect(cats[20].slug).toBe('seasonal');
+    expect(cats[24].slug).toBe('elderly-accessibility');
   });
 
   it('each category has slug, name, description, icon, and order', () => {
