@@ -1,7 +1,7 @@
 ---
-import { getCategories, url } from '../../lib/utils';
+import { getSuperCategories, url } from '../../lib/utils';
 
-const categories = getCategories().slice(0, 8);
+const superCategories = getSuperCategories();
 const year = new Date().getFullYear();
 ---
 
@@ -10,7 +10,8 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
       <!-- Brand -->
       <div>
-        <a href={url('/')} class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
+        <a href={url('/')} class="flex items-center gap-2 font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
+          <img src={url('/logo.svg')} alt="" class="w-7 h-7" width="28" height="28" />
           The Clean Pantry
         </a>
         <p class="text-sm text-bark-light/60 dark:text-dark-text/50 mt-2 max-w-xs">
@@ -31,17 +32,17 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <!-- Top categories -->
+      <!-- Categories -->
       <div>
-        <p class="text-xs font-semibold uppercase tracking-wider text-bark-light/40 dark:text-dark-text/30 mb-3">
-          Top Categories
+        <p class="text-xs font-semibold uppercase tracking-wider text-dark-text/30 mb-3">
+          Categories
         </p>
         <ul class="space-y-2">
-          {categories.map((cat) => (
+          {superCategories.map((sc) => (
             <li>
-              <a href={url(`/categories/${cat.slug}/`)} class="text-sm text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">
-                {cat.name}
-              </a>
+              <span class="text-sm text-dark-text/60">
+                {sc.icon} {sc.name}
+              </span>
             </li>
           ))}
         </ul>

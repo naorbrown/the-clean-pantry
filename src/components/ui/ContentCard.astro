@@ -1,6 +1,6 @@
 ---
 import CategoryIcon from './CategoryIcon.astro';
-import { categoryLabel, formatDuration } from '../../lib/utils';
+import { categoryLabel, getCategoryIcon, formatDuration } from '../../lib/utils';
 
 interface Props {
   href: string;
@@ -35,39 +35,47 @@ const gradientMap: Record<string, string> = {
   'car-care':             'from-sky/20 to-honey-light/10',
   'deep-cleaning':        'from-sage-dark/20 to-sage/10',
   'fitness-wellness':     'from-sky/20 to-sage/10',
-  'home-office':          'from-sky-light/20 to-cream-dark/30',
+  'home-office':          'from-sky-light/20 to-dark-elevated/30',
   seasonal:               'from-terracotta-light/20 to-honey-light/10',
 };
 
-const gradient = gradientMap[category] || 'from-sage-light/20 to-cream-dark/30';
+const gradient = gradientMap[category] || 'from-sage-light/20 to-dark-elevated/30';
 
-const difficultyDots = difficulty === 'advanced' ? 3 : difficulty === 'intermediate' ? 2 : 1;
+const difficultyColor = difficulty === 'advanced'
+  ? 'bg-terracotta/15 text-terracotta-light'
+  : difficulty === 'intermediate'
+    ? 'bg-honey/15 text-honey-light'
+    : 'bg-sage/15 text-sage-light';
+
+const difficultyLabel = difficulty === 'advanced' ? 'Advanced' : difficulty === 'intermediate' ? 'Intermediate' : 'Beginner';
+
+const emoji = getCategoryIcon(category);
 ---
 
 <a
   href={href}
-  class="group block rounded-xl overflow-hidden bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-200 no-underline"
+  class="group block rounded-xl overflow-hidden bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5 transition-all duration-200 no-underline"
 >
-  <div class={`h-28 bg-gradient-to-br ${gradient} dark:opacity-80 flex items-center justify-center relative`}>
-    <CategoryIcon slug={category} size="lg" class="text-bark/30 dark:text-dark-text/30 group-hover:scale-110 transition-transform duration-300" />
-    <span class="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider text-bark/50 dark:text-dark-text/40 bg-white/60 dark:bg-dark-bg/40 rounded-full px-2.5 py-0.5">
+  <div class={`h-28 bg-gradient-to-br ${gradient} opacity-80 flex items-center justify-center relative`}>
+    <CategoryIcon slug={category} size="lg" class="text-dark-text/20 group-hover:scale-110 transition-transform duration-300" />
+    <span class="absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider text-dark-text/40 bg-dark-bg/40 rounded-full px-2.5 py-0.5">
       {type === 'guide' ? 'Guide' : 'Recipe'}
     </span>
   </div>
 
   <div class="p-4 sm:p-5">
-    <p class="text-[11px] font-medium uppercase tracking-wider text-sage-dark dark:text-sage-light mb-1">
-      {categoryLabel(category)}
+    <p class="text-[11px] font-medium uppercase tracking-wider text-sage-light mb-1">
+      {emoji} {categoryLabel(category)}
     </p>
-    <h3 class="font-serif text-base sm:text-lg font-semibold text-bark dark:text-dark-text line-clamp-2 group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors">
+    <h3 class="font-serif text-base sm:text-lg font-semibold text-dark-text line-clamp-2 group-hover:text-sage-light transition-colors">
       {title}
     </h3>
-    <p class="text-sm text-bark-light/70 dark:text-dark-text/60 mt-1.5 line-clamp-2">
+    <p class="text-sm text-dark-text/60 mt-1.5 line-clamp-2">
       {description}
     </p>
 
     {(totalTime || difficulty || ingredientCount) && (
-      <div class="flex items-center gap-3 mt-3 text-xs text-bark-light/50 dark:text-dark-text/40">
+      <div class="flex items-center gap-3 mt-3 text-xs text-dark-text/40">
         {totalTime && (
           <span class="flex items-center gap-1">
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -78,10 +86,8 @@ const difficultyDots = difficulty === 'advanced' ? 3 : difficulty === 'intermedi
           </span>
         )}
         {difficulty && (
-          <span class="flex items-center gap-0.5">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <span class={`w-1.5 h-1.5 rounded-full ${i < difficultyDots ? 'bg-bark-light/40 dark:bg-dark-text/40' : 'bg-bark-light/15 dark:bg-dark-text/15'}`} />
-            ))}
+          <span class={`px-2 py-0.5 rounded-full text-[10px] font-medium ${difficultyColor}`}>
+            {difficultyLabel}
           </span>
         )}
         {ingredientCount && (

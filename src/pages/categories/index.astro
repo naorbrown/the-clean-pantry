@@ -2,43 +2,40 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import CategoryIcon from '../../components/ui/CategoryIcon.astro';
-import { getCategories, url } from '../../lib/utils';
-import { getCollection } from 'astro:content';
+import { getSuperCategories, categoryLabel, url } from '../../lib/utils';
 
-const categories = getCategories();
-const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
-let allGuides: any[] = [];
-try { allGuides = await getCollection('guides', ({ data }) => !data.draft); } catch { /* empty */ }
+const superCategories = getSuperCategories();
 ---
 
-<PageLayout title="Categories" description="Browse all categories — from kitchen cleaning to outdoor garden care.">
+<PageLayout title="Categories" description="Browse all categories — organized into six groups for easy navigation.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Categories' }]} />
-    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text mt-4 mb-8">Categories</h1>
+    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">Categories</h1>
+    <p class="text-dark-text/60 mb-10 max-w-2xl">Browse recipes and guides organized into six groups. Pick a category to explore.</p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {categories.map((cat) => {
-        const recipeCount = allRecipes.filter((r) => r.data.category === cat.slug).length;
-        const guideCount = allGuides.filter((g) => g.data.category === cat.slug).length;
-        return (
-          <a href={url(`/categories/${cat.slug}/`)} class="group flex gap-4 p-5 rounded-xl bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline">
-            <div class="flex-shrink-0 w-11 h-11 rounded-lg bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center">
-              <CategoryIcon slug={cat.slug} size="md" class="text-sage-dark dark:text-sage-light" />
+    <div class="space-y-10">
+      {superCategories.map((sc) => (
+        <section>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">{sc.icon}</span>
+            <div>
+              <h2 class="font-serif text-xl font-semibold text-dark-text">{sc.name}</h2>
+              <p class="text-sm text-dark-text/50">{sc.description}</p>
             </div>
-            <div class="min-w-0 flex-1">
-              <h2 class="font-serif text-base font-semibold text-bark dark:text-dark-text group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors">{cat.name}</h2>
-              <p class="text-sm text-bark-light/60 dark:text-dark-text/50 mt-0.5 line-clamp-2">{cat.description}</p>
-              {(recipeCount > 0 || guideCount > 0) && (
-                <p class="text-xs text-bark-light/40 dark:text-dark-text/30 mt-1.5">
-                  {recipeCount > 0 && `${recipeCount} recipe${recipeCount !== 1 ? 's' : ''}`}
-                  {recipeCount > 0 && guideCount > 0 && ' · '}
-                  {guideCount > 0 && `${guideCount} guide${guideCount !== 1 ? 's' : ''}`}
-                </p>
-              )}
-            </div>
-          </a>
-        );
-      })}
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {sc.subcategories.map((slug) => (
+              <a
+                href={url(`/categories/${slug}/`)}
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-dark-surface hover:bg-dark-elevated text-sm text-dark-text/80 hover:text-dark-text no-underline transition-colors"
+              >
+                <CategoryIcon slug={slug} size="sm" class="text-sage-light/60" />
+                {categoryLabel(slug)}
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   </div>
 </PageLayout>

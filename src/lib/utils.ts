@@ -80,3 +80,73 @@ export function getCategories(): Array<{ slug: string; name: string; description
 export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+/**
+ * Super-category groupings — 6 top-level categories containing 21 subcategories.
+ */
+export interface SuperCategory {
+  slug: string;
+  name: string;
+  icon: string;
+  description: string;
+  subcategories: string[]; // subcategory slugs, alphabetized
+}
+
+const superCategories: SuperCategory[] = [
+  {
+    slug: 'family-pets',
+    name: 'Family & Pets',
+    icon: '👶',
+    description: 'Baby-safe cleaners, pet care, and gentle solutions for the whole family',
+    subcategories: ['baby-child', 'pet-care'],
+  },
+  {
+    slug: 'home-cleaning',
+    name: 'Home Cleaning',
+    icon: '🏠',
+    description: 'Kitchen, bathroom, floors, laundry, and deep cleaning for every room',
+    subcategories: ['bathroom', 'deep-cleaning', 'floors', 'kitchen', 'laundry'],
+  },
+  {
+    slug: 'living-spaces',
+    name: 'Living Spaces',
+    icon: '🏡',
+    description: 'Air quality, fragrance, textiles, water, and home office — your daily environment',
+    subcategories: ['air-quality', 'candles-fragrance', 'clothing-textiles', 'home-office', 'home-setup', 'water'],
+  },
+  {
+    slug: 'outdoor-auto',
+    name: 'Outdoor & Auto',
+    icon: '🌍',
+    description: 'Garden, car care, and pest control for everything outside your front door',
+    subcategories: ['car-care', 'outdoor-garden', 'pest-control'],
+  },
+  {
+    slug: 'personal-beauty',
+    name: 'Personal & Beauty',
+    icon: '🌿',
+    description: 'Skincare, hair care, fitness gear, and personal wellness — naturally',
+    subcategories: ['beauty-cosmetics', 'fitness-wellness', 'personal-care'],
+  },
+  {
+    slug: 'seasonal-specialty',
+    name: 'Seasonal & Specialty',
+    icon: '📅',
+    description: 'Holiday prep, seasonal cleaning, and food-safe kitchen solutions',
+    subcategories: ['kitchen-food-contact', 'seasonal'],
+  },
+];
+
+/**
+ * Get all super-categories.
+ */
+export function getSuperCategories(): SuperCategory[] {
+  return superCategories;
+}
+
+/**
+ * Get the super-category that contains a given subcategory slug.
+ */
+export function getSuperCategoryForSub(slug: string): SuperCategory | undefined {
+  return superCategories.find((sc) => sc.subcategories.includes(slug));
+}

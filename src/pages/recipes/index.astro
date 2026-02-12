@@ -2,42 +2,56 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import ContentCard from '../../components/ui/ContentCard.astro';
-import SectionHeader from '../../components/ui/SectionHeader.astro';
-import CategoryStrip from '../../components/ui/CategoryStrip.astro';
 import { getCollection } from 'astro:content';
-import { getCategories, url } from '../../lib/utils';
+import { getSuperCategories, categoryLabel, url } from '../../lib/utils';
 
 const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
-const categories = getCategories();
+const superCategories = getSuperCategories();
 ---
 
 <PageLayout title="All Recipes" description="Browse all DIY natural home product recipes — simple, healthy, and effective.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Recipes' }]} />
-    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-bark dark:text-dark-text mt-4 mb-8">All Recipes</h1>
-    <div class="mb-8"><CategoryStrip categories={categories} /></div>
+    <h1 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">All Recipes</h1>
+    <p class="text-dark-text/60 mb-10">Every recipe, grouped by category. Pick one and get mixing.</p>
 
-    {categories.map((cat) => {
-      const catRecipes = allRecipes.filter((r) => r.data.category === cat.slug);
-      if (catRecipes.length === 0) return null;
+    {superCategories.map((sc) => {
+      const scRecipes = allRecipes.filter((r) => sc.subcategories.includes(r.data.category));
+      if (scRecipes.length === 0) return null;
       return (
-        <section class="mb-12">
-          <SectionHeader title={cat.name} viewAllHref={url(`/categories/${cat.slug}/`)} />
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {catRecipes.map((recipe) => (
-              <ContentCard
-                href={url(`/recipes/${recipe.id}/`)}
-                title={recipe.data.title}
-                description={recipe.data.description}
-                category={recipe.data.category}
-                type="recipe"
-                totalTime={recipe.data.totalTime}
-                difficulty={recipe.data.difficulty}
-                ingredientCount={recipe.data.ingredients.length}
-              />
-            ))}
+        <div class="mb-14">
+          <div class="flex items-center gap-2 mb-6">
+            <span class="text-xl">{sc.icon}</span>
+            <h2 class="font-serif text-xl font-semibold text-dark-text">{sc.name}</h2>
           </div>
-        </section>
+          {sc.subcategories.map((subSlug) => {
+            const subRecipes = scRecipes.filter((r) => r.data.category === subSlug);
+            if (subRecipes.length === 0) return null;
+            return (
+              <section class="mb-8 ml-2">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-serif text-lg font-medium text-dark-text/80">{categoryLabel(subSlug)}</h3>
+                  <a href={url(`/categories/${subSlug}/`)} class="text-xs text-sage-light no-underline hover:text-sage">View all &rarr;</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {subRecipes.map((recipe) => (
+                    <ContentCard
+                      href={url(`/recipes/${recipe.id}/`)}
+                      title={recipe.data.title}
+                      description={recipe.data.description}
+                      category={recipe.data.category}
+                      type="recipe"
+                      totalTime={recipe.data.totalTime}
+                      difficulty={recipe.data.difficulty}
+                      ingredientCount={recipe.data.ingredients.length}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+          <div class="section-divider"></div>
+        </div>
       );
     })}
   </div>
