@@ -1,0 +1,113 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import BrandIllustration from '../components/ui/BrandIllustration.astro';
+import { url } from '../lib/utils';
+---
+
+<PageLayout title="About — The Clean Pantry" description="Our principles: fewer products, simple ingredients, and the confidence that comes from knowing exactly what you're using.">
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-sage/8 via-dark-bg to-honey/5"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="flex justify-center mb-6">
+          <BrandIllustration variant="leaf" class="w-16 h-16 text-sage-light/60" />
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-dark-text leading-[1.15]">
+          What we <span class="text-sage-light">believe</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-dark-text/70 mt-5 max-w-xl mx-auto leading-relaxed">
+          A handful of pantry staples can replace an entire cabinet of commercial products. The Clean Pantry exists to show you how.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <h2 class="text-2xl sm:text-3xl font-bold text-dark-text text-center mb-10">Our Principles</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Principle 1 -->
+      <div class="p-6 rounded-xl bg-dark-surface shadow-[var(--shadow-card)]">
+        <div class="w-12 h-12 rounded-xl bg-sage/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="drops" class="w-7 h-7 text-sage-light" />
+        </div>
+        <h3 class="text-lg font-semibold text-dark-text mb-2">Less is more</h3>
+        <p class="text-sm text-dark-text/60 leading-relaxed">
+          A few versatile ingredients replace dozens of single-purpose products. You don't need a different bottle for every surface. Simplicity isn't a compromise — it's the goal.
+        </p>
+      </div>
+
+      <!-- Principle 2 -->
+      <div class="p-6 rounded-xl bg-dark-surface shadow-[var(--shadow-card)]">
+        <div class="w-12 h-12 rounded-xl bg-honey/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="bottle" class="w-7 h-7 text-honey" />
+        </div>
+        <h3 class="text-lg font-semibold text-dark-text mb-2">Know what you're using</h3>
+        <p class="text-sm text-dark-text/60 leading-relaxed">
+          Every recipe uses ingredients you can pronounce, understand, and find in your pantry. No hidden chemicals, no mystery formulas — just things you already trust around your family and pets.
+        </p>
+      </div>
+
+      <!-- Principle 3 -->
+      <div class="p-6 rounded-xl bg-dark-surface shadow-[var(--shadow-card)]">
+        <div class="w-12 h-12 rounded-xl bg-terracotta/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="soap" class="w-7 h-7 text-terracotta-light" />
+        </div>
+        <h3 class="text-lg font-semibold text-dark-text mb-2">Cleaning is the core</h3>
+        <p class="text-sm text-dark-text/60 leading-relaxed">
+          Household cleaning and personal hygiene are our focus — that's where the biggest impact is. Condiments, beauty recipes, and other categories are bonuses that show how far simple ingredients can go.
+        </p>
+      </div>
+
+      <!-- Principle 4 -->
+      <div class="p-6 rounded-xl bg-dark-surface shadow-[var(--shadow-card)]">
+        <div class="w-12 h-12 rounded-xl bg-sky/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="mortar" class="w-7 h-7 text-sky-light" />
+        </div>
+        <h3 class="text-lg font-semibold text-dark-text mb-2">Save money, save energy</h3>
+        <p class="text-sm text-dark-text/60 leading-relaxed">
+          When you stop buying specialized products, you keep more money in your pocket. When you know your choices are safe and effective, you stop second-guessing — and that peace of mind is worth even more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What this site is -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
+    <div class="p-8 sm:p-10 rounded-2xl bg-dark-surface/50 border border-dark-surface">
+      <h2 class="text-2xl sm:text-3xl font-bold text-dark-text text-center mb-6">What you'll find here</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="text-3xl font-bold text-sage-light">250+</p>
+          <p class="text-sm text-dark-text/60 mt-1">Recipes for cleaning, hygiene, and more</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-honey">60+</p>
+          <p class="text-sm text-dark-text/60 mt-1">In-depth guides and how-tos</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-terracotta-light">4</p>
+          <p class="text-sm text-dark-text/60 mt-1">Core ingredients that handle 90% of it</p>
+        </div>
+      </div>
+      <p class="text-dark-text/60 text-center mt-8 max-w-2xl mx-auto leading-relaxed">
+        Every recipe is free, with no ads and no affiliate links. Browse by room, task, or ingredient — from kitchen counters to garden paths, there's a simple recipe for it.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20 text-center">
+    <h2 class="text-2xl sm:text-3xl font-bold text-dark-text mb-4">Ready to simplify?</h2>
+    <p class="text-dark-text/60 mb-8 max-w-lg mx-auto">Pick a recipe, grab a few ingredients, and see how easy it is to make your own.</p>
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a href={url('/recipes/')} class="inline-flex items-center px-6 py-3 bg-sage text-white rounded-xl font-medium text-sm no-underline hover:bg-sage-dark shadow-sm hover:shadow-md transition-all">
+        Browse Recipes
+      </a>
+      <a href={url('/ingredients/')} class="inline-flex items-center px-6 py-3 bg-dark-surface text-dark-text rounded-xl font-medium text-sm no-underline shadow-[var(--shadow-card)] hover:bg-dark-elevated transition-all">
+        Explore Ingredients
+      </a>
+    </div>
+  </section>
+</PageLayout>
