@@ -52,11 +52,25 @@ test.describe('Content', () => {
     expect(await toggleBtn.count()).toBe(0);
   });
 
-  test('no about page links exist in navigation', async ({ page }) => {
+  test('about link exists in header navigation', async ({ page }) => {
     await page.goto('/');
     const header = page.locator('header');
     const aboutLinks = header.locator('a[href*="/about"]');
-    expect(await aboutLinks.count()).toBe(0);
+    expect(await aboutLinks.count()).toBe(1);
+  });
+
+  test('homepage has principles primer section', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('Our Principles')).toBeVisible();
+    await expect(page.getByText('Less is more')).toBeVisible();
+    await expect(page.getByText('Cleaning is the core')).toBeVisible();
+    await expect(page.getByRole('link', { name: /Read more about our values/ })).toBeVisible();
+  });
+
+  test('content cards do not show difficulty or time badges', async ({ page }) => {
+    await page.goto('/recipes/');
+    const badges = page.locator('text=Beginner');
+    expect(await badges.count()).toBe(0);
   });
 
   test('no Dr. Wilson or Dr. Eck references on homepage', async ({ page }) => {

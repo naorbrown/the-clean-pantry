@@ -48,6 +48,26 @@ test.describe('About Page', () => {
       }
     }
   });
+
+  test('new electronics recipes load', async ({ page }) => {
+    const urls = [
+      '/recipes/home-office/gaming-controller-cleaner/',
+      '/recipes/home-office/tv-screen-cleaner/',
+      '/recipes/home-office/tablet-cleaner/',
+      '/recipes/home-office/cable-wire-cleaner/',
+      '/recipes/home-office/power-strip-cleaner/',
+    ];
+    for (const u of urls) {
+      const res = await page.goto(u);
+      expect(res?.status()).toBe(200);
+    }
+  });
+
+  test('energetic flow guide loads', async ({ page }) => {
+    const res = await page.goto('/guides/home-setup/energetic-home-flow/');
+    expect(res?.status()).toBe(200);
+    await expect(page.locator('h1')).toBeVisible();
+  });
 });
 
 test.describe('About Page - Mobile', () => {

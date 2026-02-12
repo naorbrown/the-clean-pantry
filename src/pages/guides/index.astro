@@ -26,7 +26,9 @@ const superCategories = getSuperCategories();
             <h2 class="text-xl font-semibold text-dark-text">{sc.name}</h2>
           </div>
           {sc.subcategories.map((subSlug) => {
-            const subGuides = scGuides.filter((g) => g.data.category === subSlug);
+            const subGuides = scGuides
+              .filter((g) => g.data.category === subSlug)
+              .sort((a, b) => a.data.title.localeCompare(b.data.title));
             if (subGuides.length === 0) return null;
             return (
               <section class="mb-8 ml-2">

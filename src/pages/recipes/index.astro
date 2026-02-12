@@ -25,7 +25,9 @@ const superCategories = getSuperCategories();
             <h2 class="text-xl font-semibold text-dark-text">{sc.name}</h2>
           </div>
           {sc.subcategories.map((subSlug) => {
-            const subRecipes = scRecipes.filter((r) => r.data.category === subSlug);
+            const subRecipes = scRecipes
+              .filter((r) => r.data.category === subSlug)
+              .sort((a, b) => a.data.title.localeCompare(b.data.title));
             if (subRecipes.length === 0) return null;
             return (
               <section class="mb-8 ml-2">
@@ -41,9 +43,6 @@ const superCategories = getSuperCategories();
                       description={recipe.data.description}
                       category={recipe.data.category}
                       type="recipe"
-                      totalTime={recipe.data.totalTime}
-                      difficulty={recipe.data.difficulty}
-                      ingredientCount={recipe.data.ingredients.length}
                     />
                   ))}
                 </div>

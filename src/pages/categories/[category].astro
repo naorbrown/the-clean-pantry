@@ -17,9 +17,10 @@ export function getStaticPaths() {
 
 const { category, description } = Astro.props;
 const parentSuperCat = getSuperCategoryForSub(category);
-const recipes = await getCollection('recipes', ({ data }) => !data.draft && data.category === category);
+const recipes = (await getCollection('recipes', ({ data }) => !data.draft && data.category === category))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 let guides: any[] = [];
-try { guides = await getCollection('guides', ({ data }) => !data.draft && data.category === category); } catch { /* empty */ }
+try { guides = (await getCollection('guides', ({ data }) => !data.draft && data.category === category)).sort((a: any, b: any) => a.data.title.localeCompare(b.data.title)); } catch { /* empty */ }
 ---
 
 <PageLayout title={categoryLabel(category)} description={description}>
@@ -45,7 +46,7 @@ try { guides = await getCollection('guides', ({ data }) => !data.draft && data.c
         <SectionHeader title="Recipes" />
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {recipes.map((recipe) => (
-            <ContentCard href={url(`/recipes/${recipe.id}/`)} title={recipe.data.title} description={recipe.data.description} category={recipe.data.category} type="recipe" totalTime={recipe.data.totalTime} difficulty={recipe.data.difficulty} ingredientCount={recipe.data.ingredients.length} />
+            <ContentCard href={url(`/recipes/${recipe.id}/`)} title={recipe.data.title} description={recipe.data.description} category={recipe.data.category} type="recipe" />
           ))}
         </div>
       </section>

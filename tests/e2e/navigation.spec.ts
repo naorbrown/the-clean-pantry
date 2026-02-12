@@ -38,6 +38,7 @@ test.describe('Navigation', () => {
     await expect(nav.getByRole('link', { name: 'Guides' })).toHaveAttribute('href', /\/the-clean-pantry\/guides\//);
     await expect(nav.getByRole('link', { name: 'Ingredients' })).toHaveAttribute('href', /\/the-clean-pantry\/ingredients\//);
     await expect(nav.getByRole('link', { name: 'Categories' })).toHaveAttribute('href', /\/the-clean-pantry\/categories\//);
+    await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute('href', /\/the-clean-pantry\/about\//);
   });
 
   test('category page loads and shows content', async ({ page }) => {
