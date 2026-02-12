@@ -27,33 +27,67 @@ Every recipe should follow this structure in the body (after the frontmatter):
 - Storage notes, shelf life, etc.
 ```
 
+**Section order matters.** Always use this exact order: Steps, Why It Works, Alternative, Tips. The Alternative section is optional, but if present it must come before Tips.
+
 ## Writing Guidelines
 
 - **One action per step.** "Mix vinegar and water" is one step. Don't combine unrelated actions.
 - **Use specific measurements.** "1 cup" not "some."
 - **Plain language.** Write for someone who has never made a DIY product before.
 - **Safety first.** Always include relevant warnings in the frontmatter `safetyWarnings` and `notSafeFor` fields.
+- **Bold for emphasis.** Use `**bold**` to highlight critical instructions, warnings, or key action words within steps.
 
 ## Categories
 
 | Slug | Name | What goes here |
 |------|------|----------------|
 | `kitchen` | Kitchen Cleaning | Cleaners, degreasers, dish products |
+| `kitchen-food-contact` | Kitchen & Food Contact | Cookware, utensils, cutting boards, water bottles |
 | `bathroom` | Bathroom Cleaning | Toilet, tub, glass, grout |
+| `personal-care` | Personal Care | Deodorant, toothpaste, shampoo |
+| `beauty-cosmetics` | Beauty & Cosmetics | Makeup brushes, nail care, face masks, hair treatments |
+| `baby-child` | Baby, Child & Teen | Nursery, toys, teen gear, and gentle cleaners |
 | `laundry` | Laundry | Detergent, stain treatment, softener |
 | `floors` | Floor Care | Mop solutions, carpet care |
-| `personal-care` | Personal Care | Deodorant, toothpaste, shampoo |
-| `baby-child` | Baby, Child & Teen | Nursery, toys, teen gear, and gentle cleaners |
-| `pest-control` | Pest Control | Ant, flea, insect solutions |
+| `clothing-textiles` | Clothing & Textiles | Fabric care, wool wash, garment freshening |
 | `air-quality` | Air Quality | Room sprays, odor eliminators, air purification |
 | `candles-fragrance` | Candles & Fragrance | DIY candles, wax melts, scent blends |
-| `clothing-textiles` | Clothing & Textiles | Fabric care, wool wash, garment freshening |
 | `water` | Water | Filtration, softening, testing |
 | `home-setup` | Home Setup | Guides for home environment, lighting, EMF, mattress |
+| `pest-control` | Pest Control | Ant, flea, insect solutions |
+| `pet-care` | Pet Care | Pet shampoo, bedding, bowl cleaning, flea treatment |
+| `outdoor-garden` | Outdoor & Garden | Deck, patio, grill, garden tools, insect repellent |
+| `car-care` | Car Care | Interior, exterior, air fresheners, dashboard |
+| `deep-cleaning` | Deep Cleaning | Grout, mold, rust, adhesive removal, garage |
+| `fitness-wellness` | Fitness & Wellness | Yoga mats, gym equipment, sports bottles |
+| `home-office` | Home Office | Monitor, keyboard, desk, and chair cleaning |
+| `seasonal` | Seasonal | Holiday, spring cleaning, back-to-school, weather-specific |
 | `entertaining` | Entertaining & Guests | Hosting prep, dinner parties, guest bedrooms, cleanup |
 | `sleep-wellness` | Sleep & Wellness | EMF, circadian rhythms, bedroom plants, sleep optimization |
 | `daily-habits` | Daily Habits | Shoe policies, medicine storage, receipt handling |
 | `elderly-accessibility` | Elderly & Accessibility | Grab bars, non-slip, medication management |
+
+## Ingredient Body Structure
+
+Ingredient files use structured `##` sections in the body (after frontmatter):
+
+```markdown
+## What It Does
+
+2-4 sentences. Warm, accessible summary of the ingredient and why it belongs in a cleaning kit.
+
+## How to Use It
+
+Where this ingredient appears in recipes and how it works. Include key interactions and warnings. Bullet lists welcome.
+
+## Buying & Storage
+
+Brand notes, bulk buying, storage tips. Keep it under 80 words.
+
+## Enhance It
+
+Optional. Essential oil pairings, alternative forms, bonus uses beyond basic cleaning.
+```
 
 ## Guide Body Structure
 
