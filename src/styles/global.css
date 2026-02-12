@@ -14,6 +14,7 @@
   --color-honey-light: #E8C96E;
   --color-sky: #6BA3BE;
   --color-sky-light: #A3D0E4;
+  --color-honey-dark: #B89530;
 
   --color-dark-bg: #1A1612;
   --color-dark-surface: #2A2420;
@@ -30,6 +31,7 @@
 @layer base {
   html {
     font-family: var(--font-sans);
+    font-size: 16px;
     color: var(--color-bark);
     background-color: var(--color-cream);
   }
@@ -63,13 +65,31 @@
     color: var(--color-sage);
   }
 
-  /* Prose improvements */
+  /* Prose readability improvements */
   .prose {
-    line-height: 1.75;
+    line-height: 1.8;
+    font-size: 1.0625rem;
+  }
+  .prose p {
+    margin-bottom: 1.25em;
+  }
+  .prose h2 {
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+  }
+  .prose h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  .prose ul, .prose ol {
+    margin-bottom: 1.25em;
+  }
+  .prose li {
+    margin-bottom: 0.5em;
   }
 }
 
-/* Pagefind overrides — default (inline in overlay) */
+/* Pagefind overrides */
 :root {
   --pagefind-ui-scale: 1;
   --pagefind-ui-primary: var(--color-sage-dark);
@@ -92,19 +112,39 @@
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Search overlay dialog */
+/* Search overlay dialog — light semi-transparent backdrop, no blur */
 dialog.search-overlay::backdrop {
-  background: rgb(61 46 30 / 0.5);
-  backdrop-filter: blur(4px);
+  background: rgb(61 46 30 / 0.3);
 }
 .dark dialog.search-overlay::backdrop {
-  background: rgb(26 22 18 / 0.8);
+  background: rgb(26 22 18 / 0.5);
 }
 
 /* Mobile menu dialog */
 dialog.mobile-menu::backdrop {
-  background: rgb(61 46 30 / 0.5);
+  background: rgb(61 46 30 / 0.4);
 }
 .dark dialog.mobile-menu::backdrop {
-  background: rgb(26 22 18 / 0.8);
+  background: rgb(26 22 18 / 0.6);
+}
+
+/* Callout boxes for safety and tips */
+.callout {
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.callout-warning {
+  background: rgb(198 123 92 / 0.08);
+  border-left: 3px solid var(--color-terracotta);
+}
+.callout-tip {
+  background: rgb(122 158 126 / 0.08);
+  border-left: 3px solid var(--color-sage);
+}
+.dark .callout-warning {
+  background: rgb(198 123 92 / 0.1);
+}
+.dark .callout-tip {
+  background: rgb(122 158 126 / 0.1);
 }

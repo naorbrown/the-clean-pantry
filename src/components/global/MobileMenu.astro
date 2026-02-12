@@ -1,6 +1,6 @@
 ---
 import CategoryIcon from '../ui/CategoryIcon.astro';
-import { getCategories } from '../../lib/utils';
+import { getCategories, url } from '../../lib/utils';
 
 const categories = getCategories();
 ---
@@ -8,7 +8,7 @@ const categories = getCategories();
 <dialog id="mobile-menu" class="mobile-menu fixed inset-0 w-full h-full max-w-none max-h-none m-0 p-0 bg-transparent">
   <div class="fixed inset-y-0 left-0 w-[85vw] max-w-xs bg-cream dark:bg-dark-bg shadow-xl overflow-y-auto">
     <div class="flex items-center justify-between px-5 h-16 border-b border-cream-dark dark:border-dark-surface">
-      <a href="/" class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
+      <a href={url('/')} class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline">
         The Clean Pantry
       </a>
       <button
@@ -26,23 +26,23 @@ const categories = getCategories();
     <nav class="px-5 py-4">
       <ul class="space-y-1">
         <li>
-          <a href="/recipes/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
+          <a href={url('/recipes/')} class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
             Recipes
           </a>
         </li>
         <li>
-          <a href="/guides/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
+          <a href={url('/guides/')} class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
             Guides
           </a>
         </li>
         <li>
-          <a href="/ingredients/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
+          <a href={url('/ingredients/')} class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
             Ingredients
           </a>
         </li>
         <li>
-          <a href="/about/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
-            About
+          <a href={url('/categories/')} class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-bark dark:text-dark-text no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors">
+            Categories
           </a>
         </li>
       </ul>
@@ -56,7 +56,7 @@ const categories = getCategories();
         {categories.map((cat) => (
           <li>
             <a
-              href={`/categories/${cat.slug}/`}
+              href={url(`/categories/${cat.slug}/`)}
               class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-bark-light dark:text-dark-text/70 no-underline hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors"
             >
               <CategoryIcon slug={cat.slug} size="sm" class="text-bark-light/40 dark:text-dark-text/40" />

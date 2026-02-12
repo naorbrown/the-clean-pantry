@@ -1,45 +1,54 @@
 ---
+import { url } from '../../lib/utils';
+const pagefindBasePath = url('/pagefind/');
 ---
 
-<dialog id="search-dialog" class="search-overlay fixed inset-0 w-full h-full max-w-none max-h-none m-0 p-0 bg-transparent open:flex open:items-start open:justify-center">
-  <div class="w-full max-w-2xl mx-auto mt-[10vh] px-4">
-    <div class="bg-cream dark:bg-dark-bg rounded-2xl shadow-xl overflow-hidden border border-cream-dark dark:border-dark-surface">
-      <div class="flex items-center justify-between px-5 pt-4 pb-2">
-        <span class="text-sm font-medium text-bark-light/60 dark:text-dark-text/50">Search</span>
+<!-- Search panel: slides down from top, no blur -->
+<dialog id="search-dialog" class="search-overlay fixed inset-x-0 top-0 w-full max-w-none max-h-none m-0 p-0 bg-transparent">
+  <div class="w-full max-w-2xl mx-auto mt-16 sm:mt-20 px-4">
+    <div class="bg-cream dark:bg-dark-bg rounded-xl shadow-xl overflow-hidden border border-cream-dark dark:border-dark-surface">
+      <div class="flex items-center justify-between px-4 pt-3 pb-1">
+        <div class="flex items-center gap-2 text-bark-light/50 dark:text-dark-text/40">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <span class="text-sm font-medium">Search recipes, guides, and ingredients</span>
+        </div>
         <button
           id="search-close"
           type="button"
-          class="p-1 rounded-lg text-bark-light/40 dark:text-dark-text/40 hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors"
+          class="p-1.5 rounded-lg text-bark-light/40 dark:text-dark-text/40 hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors"
           aria-label="Close search"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div id="search-container" class="px-5 pb-5"></div>
+      <div id="search-container" class="px-4 pb-4"></div>
     </div>
   </div>
 </dialog>
 
-<script>
-  const dialog = document.getElementById('search-dialog') as HTMLDialogElement;
+<script define:vars={{ pagefindBasePath }}>
+  const dialog = document.getElementById('search-dialog');
   const closeBtn = document.getElementById('search-close');
   let pagefindInitialized = false;
 
   function openSearch() {
     dialog?.showModal();
-    if (!pagefindInitialized && typeof (window as any).PagefindUI !== 'undefined') {
-      new (window as any).PagefindUI({
+    if (!pagefindInitialized && typeof window.PagefindUI !== 'undefined') {
+      new window.PagefindUI({
         element: '#search-container',
         showImages: false,
         showSubResults: false,
         resetStyles: false,
+        basePath: pagefindBasePath,
       });
       pagefindInitialized = true;
     }
     setTimeout(() => {
-      const input = dialog?.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+      const input = dialog?.querySelector('.pagefind-ui__search-input');
       input?.focus();
     }, 100);
   }
@@ -59,8 +68,10 @@
       e.preventDefault();
       dialog?.open ? closeSearch() : openSearch();
     }
+    if (e.key === 'Escape' && dialog?.open) {
+      closeSearch();
+    }
   });
 
-  // Expose for header button
-  (window as any).__openSearch = openSearch;
+  window.__openSearch = openSearch;
 </script>

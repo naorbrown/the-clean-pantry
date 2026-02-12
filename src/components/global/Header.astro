@@ -1,66 +1,84 @@
 ---
+import { url } from '../../lib/utils';
 ---
 
-<header class="border-b border-cream-dark dark:border-dark-surface sticky top-0 bg-cream/95 dark:bg-dark-bg/95 backdrop-blur-sm z-40">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-    <!-- Mobile: hamburger -->
-    <button
-      id="mobile-menu-open"
-      type="button"
-      class="p-2 -ml-2 rounded-lg text-bark-light dark:text-dark-text/70 hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors md:hidden"
-      aria-label="Open menu"
-    >
-      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-      </svg>
-    </button>
+<header class="sticky top-0 z-40 bg-cream/95 dark:bg-dark-bg/95 backdrop-blur-md border-b border-cream-dark/60 dark:border-dark-surface/60">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-14 sm:h-16">
+      <!-- Left: hamburger (mobile) + logo -->
+      <div class="flex items-center gap-3">
+        <button
+          id="mobile-menu-open"
+          type="button"
+          class="p-2 -ml-2 rounded-lg text-bark-light/70 dark:text-dark-text/60 hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/60 dark:hover:bg-dark-surface/60 transition-colors md:hidden"
+          aria-label="Open menu"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
 
-    <!-- Logo -->
-    <a href="/" class="font-serif text-lg font-semibold text-bark dark:text-dark-text no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">
-      The Clean Pantry
-    </a>
+        <a href={url('/')} class="flex items-center gap-2.5 no-underline group">
+          <span class="w-8 h-8 rounded-lg bg-sage flex items-center justify-center text-white text-sm font-bold shadow-sm">
+            CP
+          </span>
+          <span class="font-serif text-lg font-semibold text-bark dark:text-dark-text group-hover:text-sage-dark dark:group-hover:text-sage-light transition-colors hidden sm:inline">
+            The Clean Pantry
+          </span>
+        </a>
+      </div>
 
-    <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-6 ml-8 flex-1" aria-label="Main navigation">
-      <a href="/recipes/" class="text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Recipes</a>
-      <a href="/guides/" class="text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Guides</a>
-      <a href="/ingredients/" class="text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">Ingredients</a>
-      <a href="/about/" class="text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-sage-dark dark:hover:text-sage-light transition-colors">About</a>
-    </nav>
+      <!-- Center: desktop nav -->
+      <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+        <a href={url('/recipes/')} class="px-3 py-1.5 rounded-lg text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/50 dark:hover:bg-dark-surface/50 transition-all">Recipes</a>
+        <a href={url('/guides/')} class="px-3 py-1.5 rounded-lg text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/50 dark:hover:bg-dark-surface/50 transition-all">Guides</a>
+        <a href={url('/ingredients/')} class="px-3 py-1.5 rounded-lg text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/50 dark:hover:bg-dark-surface/50 transition-all">Ingredients</a>
+        <a href={url('/categories/')} class="px-3 py-1.5 rounded-lg text-sm font-medium text-bark-light/70 dark:text-dark-text/60 no-underline hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/50 dark:hover:bg-dark-surface/50 transition-all">Categories</a>
+      </nav>
 
-    <!-- Right actions -->
-    <div class="flex items-center gap-1">
-      <!-- Search -->
-      <button
-        id="search-open"
-        type="button"
-        class="p-2 rounded-lg text-bark-light dark:text-dark-text/70 hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors"
-        aria-label="Search"
-      >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
-      </button>
+      <!-- Right: search trigger + theme toggle -->
+      <div class="flex items-center gap-1">
+        <!-- Desktop: search button with hint -->
+        <button
+          id="search-open"
+          type="button"
+          class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-bark-light/50 dark:text-dark-text/40 bg-cream-dark/40 dark:bg-dark-surface/40 border border-cream-dark/60 dark:border-dark-surface/60 hover:bg-cream-dark/70 dark:hover:bg-dark-surface/70 hover:text-bark-light/70 dark:hover:text-dark-text/60 transition-all cursor-pointer"
+          aria-label="Search"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <span class="text-xs">Search...</span>
+          <kbd class="hidden lg:inline text-[10px] px-1.5 py-0.5 rounded bg-cream-dark/60 dark:bg-dark-elevated/60 border border-cream-dark dark:border-dark-surface text-bark-light/40 dark:text-dark-text/30 font-sans">⌘K</kbd>
+        </button>
 
-      <!-- Keyboard shortcut hint (desktop only) -->
-      <span class="hidden lg:inline-flex items-center gap-0.5 text-[10px] text-bark-light/30 dark:text-dark-text/25 -ml-1 mr-1">
-        <kbd class="px-1 py-0.5 bg-cream-dark/80 dark:bg-dark-surface/80 rounded text-[10px]">⌘K</kbd>
-      </span>
+        <!-- Mobile: compact search icon -->
+        <button
+          id="search-open-mobile"
+          type="button"
+          class="sm:hidden p-2 rounded-lg text-bark-light/70 dark:text-dark-text/60 hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/60 dark:hover:bg-dark-surface/60 transition-colors"
+          aria-label="Search"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+        </button>
 
-      <!-- Theme toggle -->
-      <button
-        id="theme-toggle"
-        type="button"
-        class="p-2 rounded-lg text-bark-light dark:text-dark-text/70 hover:bg-cream-dark dark:hover:bg-dark-surface transition-colors"
-        aria-label="Toggle dark mode"
-      >
-        <svg class="w-5 h-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-        </svg>
-        <svg class="w-5 h-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-        </svg>
-      </button>
+        <!-- Theme toggle -->
+        <button
+          id="theme-toggle"
+          type="button"
+          class="p-2 rounded-lg text-bark-light/70 dark:text-dark-text/60 hover:text-bark dark:hover:text-dark-text hover:bg-cream-dark/60 dark:hover:bg-dark-surface/60 transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          <svg class="w-5 h-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+          </svg>
+          <svg class="w-5 h-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </header>
@@ -72,6 +90,10 @@
   });
 
   document.getElementById('search-open')?.addEventListener('click', () => {
+    (window as any).__openSearch?.();
+  });
+
+  document.getElementById('search-open-mobile')?.addEventListener('click', () => {
     (window as any).__openSearch?.();
   });
 

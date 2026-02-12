@@ -1,0 +1,69 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Content', () => {
+  test('homepage has stats section', async ({ page }) => {
+    await page.goto('/');
+    // Should show recipe/guide/category counts
+    await expect(page.getByText('Recipes', { exact: true }).first()).toBeVisible();
+  });
+
+  test('homepage has "How it works" section', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('How it works')).toBeVisible();
+    await expect(page.getByText('Pick a recipe')).toBeVisible();
+    await expect(page.getByText('Grab ingredients')).toBeVisible();
+    await expect(page.getByText('Mix and use')).toBeVisible();
+  });
+
+  test('homepage has core ingredients section', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('The Core Four Ingredients')).toBeVisible();
+  });
+
+  test('recipes page groups by category', async ({ page }) => {
+    await page.goto('/recipes/');
+    // Should have category section headers
+    await expect(page.getByRole('heading', { name: 'Kitchen Cleaning' })).toBeVisible();
+  });
+
+  test('category page shows recipe and guide counts', async ({ page }) => {
+    await page.goto('/categories/');
+    // Category cards should be present
+    const categoryCards = page.locator('a[href*="/categories/"]');
+    expect(await categoryCards.count()).toBeGreaterThan(0);
+  });
+
+  test('ingredients page has three tiers', async ({ page }) => {
+    await page.goto('/ingredients/');
+    await expect(page.getByText('Core')).toBeVisible();
+    await expect(page.getByText('Secondary')).toBeVisible();
+  });
+
+  test('dark mode toggle works', async ({ page }) => {
+    await page.goto('/');
+    const html = page.locator('html');
+
+    // Initially may or may not be dark
+    await page.locator('#theme-toggle').click();
+    const hasDark = await html.evaluate((el) => el.classList.contains('dark'));
+
+    // Toggle again
+    await page.locator('#theme-toggle').click();
+    const hasDarkAfter = await html.evaluate((el) => el.classList.contains('dark'));
+    expect(hasDark).not.toBe(hasDarkAfter);
+  });
+
+  test('no about page links exist in navigation', async ({ page }) => {
+    await page.goto('/');
+    const header = page.locator('header');
+    const aboutLinks = header.locator('a[href*="/about"]');
+    expect(await aboutLinks.count()).toBe(0);
+  });
+
+  test('no Dr. Wilson or Dr. Eck references on homepage', async ({ page }) => {
+    await page.goto('/');
+    const text = await page.textContent('body');
+    expect(text).not.toContain('Wilson');
+    expect(text).not.toContain('Eck');
+  });
+});

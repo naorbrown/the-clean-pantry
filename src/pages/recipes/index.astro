@@ -5,7 +5,7 @@ import ContentCard from '../../components/ui/ContentCard.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CategoryStrip from '../../components/ui/CategoryStrip.astro';
 import { getCollection } from 'astro:content';
-import { getCategories } from '../../lib/utils';
+import { getCategories, url } from '../../lib/utils';
 
 const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
 const categories = getCategories();
@@ -22,11 +22,11 @@ const categories = getCategories();
       if (catRecipes.length === 0) return null;
       return (
         <section class="mb-12">
-          <SectionHeader title={cat.name} viewAllHref={`/categories/${cat.slug}/`} />
+          <SectionHeader title={cat.name} viewAllHref={url(`/categories/${cat.slug}/`)} />
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {catRecipes.map((recipe) => (
               <ContentCard
-                href={`/recipes/${recipe.id}/`}
+                href={url(`/recipes/${recipe.id}/`)}
                 title={recipe.data.title}
                 description={recipe.data.description}
                 category={recipe.data.category}

@@ -4,6 +4,7 @@ import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import ContentCard from '../../components/ui/ContentCard.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import { getCollection, render } from 'astro:content';
+import { url } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const ingredients = await getCollection('ingredients');
@@ -101,7 +102,7 @@ const propertyCards = [
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {relatedRecipes.slice(0, 6).map((recipe) => (
             <ContentCard
-              href={`/recipes/${recipe.id}/`}
+              href={url(`/recipes/${recipe.id}/`)}
               title={recipe.data.title}
               description={recipe.data.description}
               category={recipe.data.category}

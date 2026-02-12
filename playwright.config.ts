@@ -8,6 +8,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
   use: {
-    baseURL: 'http://localhost:4321',
+    baseURL: 'http://localhost:4321/the-clean-pantry',
   },
 });
