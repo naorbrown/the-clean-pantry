@@ -14,7 +14,7 @@ const { href, title, description, category } = Astro.props;
 
 <a
   href={href}
-  class="group flex gap-4 p-4 sm:p-5 rounded-xl bg-white dark:bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-200 no-underline border-l-4 border-sage dark:border-sage-dark"
+  class="group flex gap-4 p-4 sm:p-5 rounded-xl bg-dark-surface shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-200 no-underline border-l-4 border-sage-dark"
 >
   <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-sage-light/20 dark:bg-sage/10 flex items-center justify-center">
     <CategoryIcon slug={category} size="sm" class="text-sage-dark dark:text-sage-light" />

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import ContentCard from '../components/ui/ContentCard.astro';
+import BrandIllustration from '../components/ui/BrandIllustration.astro';
 import { getSuperCategories, url } from '../lib/utils';
 import { getCollection } from 'astro:content';
 
@@ -8,6 +9,9 @@ const superCategories = getSuperCategories();
 const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
 const featuredRecipes = allRecipes.filter((r) => r.data.featured);
 const displayRecipes = featuredRecipes.length >= 3 ? featuredRecipes.slice(0, 6) : allRecipes.slice(0, 6);
+
+const ingredients = await getCollection('ingredients');
+const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
 ---
 
 <PageLayout title="The Clean Pantry" description="Simple, non-toxic recipes and guides for your entire home — from kitchen to garden, waking to sleeping.">
@@ -16,6 +20,9 @@ const displayRecipes = featuredRecipes.length >= 3 ? featuredRecipes.slice(0, 6)
     <div class="absolute inset-0 bg-gradient-to-br from-sage/8 via-dark-bg to-honey/5"></div>
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
       <div class="max-w-3xl mx-auto text-center">
+        <div class="flex justify-center mb-6">
+          <BrandIllustration variant="leaf" class="w-16 h-16 text-sage-light/60" />
+        </div>
         <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-text leading-[1.15]">
           Replace toxic products with <span class="text-sage-light">simple, safe</span> alternatives
         </h1>
@@ -24,7 +31,7 @@ const displayRecipes = featuredRecipes.length >= 3 ? featuredRecipes.slice(0, 6)
         </p>
         <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
           <a href={url('/recipes/')} class="inline-flex items-center px-6 py-3 bg-sage text-white rounded-xl font-medium text-sm no-underline hover:bg-sage-dark shadow-sm hover:shadow-md transition-all">
-            Browse Recipes
+            Find a Recipe
           </a>
           <a href={url('/ingredients/')} class="inline-flex items-center px-6 py-3 bg-dark-surface text-dark-text rounded-xl font-medium text-sm no-underline shadow-[var(--shadow-card)] hover:bg-dark-elevated transition-all">
             Explore Ingredients
@@ -33,6 +40,52 @@ const displayRecipes = featuredRecipes.length >= 3 ? featuredRecipes.slice(0, 6)
       </div>
     </div>
   </section>
+
+  <!-- How it works -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text text-center mb-10">How it works</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+      <div class="text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-sage/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="leaf" class="w-8 h-8 text-sage-light" />
+        </div>
+        <h3 class="font-serif font-semibold text-dark-text mb-1">Pick a recipe</h3>
+        <p class="text-sm text-dark-text/60">Browse by room, task, or ingredient — there's a recipe for everything.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-honey/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="bottle" class="w-8 h-8 text-honey" />
+        </div>
+        <h3 class="font-serif font-semibold text-dark-text mb-1">Grab ingredients</h3>
+        <p class="text-sm text-dark-text/60">Most recipes use just 2–4 pantry staples you already have at home.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-terracotta/10 flex items-center justify-center mb-4">
+          <BrandIllustration variant="mortar" class="w-8 h-8 text-terracotta-light" />
+        </div>
+        <h3 class="font-serif font-semibold text-dark-text mb-1">Mix and use</h3>
+        <p class="text-sm text-dark-text/60">Follow the steps, mix it up, and enjoy a cleaner, healthier home.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Core Four Ingredients -->
+  {coreIngredients.length > 0 && (
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-dark-text text-center mb-3">The Core Four Ingredients</h2>
+      <p class="text-dark-text/60 text-center mb-8 max-w-xl mx-auto">These four pantry staples handle 90% of your household cleaning needs.</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {coreIngredients.map((ing) => (
+          <a href={url(`/ingredients/${ing.id}/`)} class="group flex flex-col items-center text-center p-5 rounded-xl bg-dark-surface hover:bg-dark-elevated shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline">
+            <div class="w-12 h-12 rounded-xl bg-sage/10 flex items-center justify-center mb-3 group-hover:bg-sage/15 transition-colors">
+              <BrandIllustration variant="bottle" class="w-7 h-7 text-sage-light/70 group-hover:text-sage-light transition-colors" />
+            </div>
+            <h3 class="font-serif text-sm font-semibold text-dark-text group-hover:text-sage-light transition-colors">{ing.data.name}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- 6 Super-Categories -->
   <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
