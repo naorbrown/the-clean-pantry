@@ -36,6 +36,7 @@ const pagefindBasePath = url('/pagefind/');
 
   function openSearch() {
     dialog?.showModal();
+    document.documentElement.style.overflow = 'hidden';
     if (!pagefindInitialized && typeof window.PagefindUI !== 'undefined') {
       new window.PagefindUI({
         element: '#search-container',
@@ -54,6 +55,7 @@ const pagefindBasePath = url('/pagefind/');
 
   function closeSearch() {
     dialog?.close();
+    document.documentElement.style.overflow = '';
   }
 
   closeBtn?.addEventListener('click', closeSearch);
