@@ -147,3 +147,15 @@ elderly-accessibility:
   description: "Grab bars, non-slip solutions, medication management, and elder-proofing your home"
   icon: "♿"
   order: 25
+
+condiments:
+  name: "Condiments"
+  description: "Homemade ketchup, mustard, hot sauce, dressings, and sauces from scratch"
+  icon: "🫙"
+  order: 26
+
+travel:
+  name: "Travel & On-the-Go"
+  description: "Portable cleaning sprays, sanitizing wipes, and freshening solutions for hotels, Airbnbs, and transit"
+  icon: "✈️"
+  order: 27
