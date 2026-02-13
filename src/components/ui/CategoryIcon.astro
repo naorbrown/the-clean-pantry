@@ -223,7 +223,15 @@ const sizeClass = sizeMap[size];
       <line x1="8" y1="12" x2="16" y2="12" />
     </Fragment>
   )}
-  {!['kitchen','kitchen-food-contact','bathroom','personal-care','beauty-cosmetics','baby-child','laundry','floors','clothing-textiles','air-quality','candles-fragrance','water','home-setup','pest-control','pet-care','outdoor-garden','car-care','deep-cleaning','fitness-wellness','home-office','seasonal','entertaining','sleep-wellness','daily-habits','elderly-accessibility','condiments'].includes(slug) && (
+  {slug === 'travel' && (
+    <Fragment>
+      <rect x="3" y="8" width="18" height="13" rx="2" />
+      <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+      <line x1="12" y1="12" x2="12" y2="16" />
+      <line x1="10" y1="14" x2="14" y2="14" />
+    </Fragment>
+  )}
+  {!['kitchen','kitchen-food-contact','bathroom','personal-care','beauty-cosmetics','baby-child','laundry','floors','clothing-textiles','air-quality','candles-fragrance','water','home-setup','pest-control','pet-care','outdoor-garden','car-care','deep-cleaning','fitness-wellness','home-office','seasonal','entertaining','sleep-wellness','daily-habits','elderly-accessibility','condiments','travel'].includes(slug) && (
     <Fragment>
       <rect x="4" y="4" width="16" height="16" rx="2" />
       <line x1="9" y1="9" x2="15" y2="9" />

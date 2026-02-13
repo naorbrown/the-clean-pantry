@@ -54,6 +54,7 @@ const categories: Record<string, { name: string; description: string; icon: stri
   'daily-habits':         { name: 'Daily Habits',          description: 'Shoe policies, medicine storage, receipt handling, and overlooked household best practices',   icon: '📋', order: 24 },
   'elderly-accessibility':{ name: 'Elderly & Accessibility',description: 'Grab bars, non-slip solutions, medication management, and elder-proofing your home',         icon: '♿', order: 25 },
   condiments:             { name: 'Condiments',              description: 'Homemade ketchup, mustard, hot sauce, dressings, and sauces from scratch',                    icon: '🫙', order: 26 },
+  travel:                 { name: 'Travel & On-the-Go',      description: 'Portable cleaning sprays, sanitizing wipes, and freshening solutions for hotels, Airbnbs, and transit', icon: '✈️', order: 27 },
 };
 
 /**
@@ -87,7 +88,7 @@ export function capitalize(str: string): string {
 }
 
 /**
- * Super-category groupings — 6 top-level categories containing 21 subcategories.
+ * Super-category groupings — 6 top-level categories containing 27 subcategories.
  */
 export interface SuperCategory {
   slug: string;
@@ -123,8 +124,8 @@ const superCategories: SuperCategory[] = [
     slug: 'outdoor-auto',
     name: 'Outdoor & Auto',
     icon: '🌍',
-    description: 'Garden, car care, and pest control for everything outside your front door',
-    subcategories: ['car-care', 'outdoor-garden', 'pest-control'],
+    description: 'Garden, car care, pest control, and travel solutions for life outside your front door',
+    subcategories: ['car-care', 'outdoor-garden', 'pest-control', 'travel'],
   },
   {
     slug: 'personal-beauty',
