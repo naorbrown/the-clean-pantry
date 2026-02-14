@@ -8,7 +8,7 @@
 
 ## What Is This?
 
-The Clean Pantry is a free, open-source collection of **256 DIY recipes** and **64 guides** for non-toxic home care. Four pantry staples handle 90% of your cleaning needs: **vinegar, baking soda, castile soap, and water**.
+The Clean Pantry is a free, open-source collection of **256 DIY recipes** and **64 guides** for non-toxic home care. A few pantry staples handle most of your cleaning needs: **vinegar, baking soda, castile soap, and water**.
 
 ## Highlights
 
@@ -68,7 +68,7 @@ src/
   content/
     recipes/        # 256 MDX recipe files (by category folder)
     guides/         # 64 MDX guide files (by category folder)
-    ingredients/    # 6 core ingredient profiles
+    ingredients/    # 10 ingredient profiles
   components/       # Astro UI components
   layouts/          # Page layouts (recipe, guide, base)
   pages/            # Route files (auto-generates URLs)
