@@ -41,7 +41,7 @@ test.describe('Ingredient pages', () => {
     expect(await recipeCards.count()).toBeGreaterThan(0);
   });
 
-  test('all 7 ingredient pages load successfully', async ({ page }) => {
+  test('all 10 ingredient pages load successfully', async ({ page }) => {
     const slugs = [
       'white-vinegar',
       'baking-soda',
@@ -50,6 +50,9 @@ test.describe('Ingredient pages', () => {
       'washing-soda',
       'hydrogen-peroxide',
       'borax',
+      'essential-oil',
+      'isopropyl-alcohol',
+      'coconut-oil',
     ];
     for (const slug of slugs) {
       const response = await page.goto(`/ingredients/${slug}/`);
