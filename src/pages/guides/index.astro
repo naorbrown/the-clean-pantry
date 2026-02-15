@@ -14,7 +14,7 @@ const superCategories = getSuperCategories();
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Guides' }]} />
     <h1 class="text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">All Guides</h1>
-    <p class="text-dark-text/60 mb-10">In-depth guides to help you make informed choices about the products in your home.</p>
+    <p class="text-dark-text/60 mb-10">In-depth guides to help you make informed choices about cleaning and hygiene products in your home.</p>
 
     {superCategories.map((sc) => {
       const scGuides = allGuides.filter((g) => sc.subcategories.includes(g.data.category));

@@ -15,7 +15,7 @@ const ingredients = await getCollection('ingredients');
 const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
 ---
 
-<PageLayout title="The Clean Pantry" description="Simple, non-toxic recipes and guides for your entire home — from kitchen to garden, waking to sleeping.">
+<PageLayout title="The Clean Pantry" description="Simple, non-toxic cleaning and hygiene recipes for your entire home — from kitchen to garden, waking to sleeping.">
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-sage/8 via-dark-bg to-honey/5"></div>
@@ -25,7 +25,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
           <BrandIllustration variant="leaf" class="w-16 h-16 text-sage-light/60" />
         </div>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-text leading-[1.15]">
-          Replace toxic products with <span class="text-sage-light">simple, safe</span> alternatives
+          Replace toxic hygiene products with <span class="text-sage-light">simple, safe</span> alternatives
         </h1>
         <p class="text-lg sm:text-xl text-dark-text/70 mt-5 max-w-2xl mx-auto leading-relaxed">
           Free recipes using everyday pantry ingredients — vinegar, baking soda, castile soap, and water do most of the work.
@@ -112,7 +112,7 @@ const coreIngredients = ingredients.filter((i) => i.data.category === 'core');
   {coreIngredients.length > 0 && (
     <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
       <h2 class="text-2xl sm:text-3xl font-bold text-dark-text text-center mb-3">The Core Four Ingredients</h2>
-      <p class="text-dark-text/60 text-center mb-8 max-w-xl mx-auto">These four pantry staples handle most of your household cleaning needs.</p>
+      <p class="text-dark-text/60 text-center mb-8 max-w-xl mx-auto">These four pantry staples handle most of your cleaning and hygiene needs.</p>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {coreIngredients.map((ing) => (
           <a href={url(`/ingredients/${ing.id}/`)} class="group flex flex-col items-center text-center p-5 rounded-xl bg-dark-surface hover:bg-dark-elevated shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all no-underline">
