@@ -9,7 +9,7 @@ const allRecipes = await getCollection('recipes', ({ data }) => !data.draft);
 const superCategories = getSuperCategories();
 ---
 
-<PageLayout title="All Recipes" description="Browse all DIY natural home product recipes — simple, healthy, and effective.">
+<PageLayout title="All Recipes" description="Browse all DIY natural cleaning and hygiene recipes — simple, healthy, and effective.">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <Breadcrumb items={[{ label: 'Recipes' }]} />
     <h1 class="text-2xl sm:text-3xl font-bold text-dark-text mt-4 mb-2">All Recipes</h1>
