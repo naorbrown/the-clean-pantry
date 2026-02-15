@@ -4,6 +4,7 @@ import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import CategoryIcon from '../components/ui/CategoryIcon.astro';
 import IngredientList from '../components/recipe/IngredientList.astro';
 import SafetyWarnings from '../components/recipe/SafetyWarnings.astro';
+import AtAGlance from '../components/ui/AtAGlance.astro';
 import RelatedContent from '../components/ui/RelatedContent.astro';
 import { categoryLabel, formatDuration, url } from '../lib/utils';
 import { generateHowToSchema, generateBreadcrumbSchema } from '../lib/schema';
@@ -115,6 +116,7 @@ const related = allRecipes
       <!-- Main content -->
       <div class="min-w-0">
         <SafetyWarnings warnings={safetyWarnings} notSafeFor={notSafeFor} />
+        <AtAGlance items={recipe.data.tldr} />
 
         <!-- Ingredient list: inline on mobile -->
         <div class="lg:hidden mb-8">

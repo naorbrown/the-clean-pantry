@@ -49,6 +49,7 @@ const recipes = defineCollection({
         notes: z.string().optional(),
       })
     ),
+    tldr: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     relatedRecipes: z.array(z.string()).default([]),
     safetyWarnings: z.array(z.string()).default([]),
@@ -66,6 +67,7 @@ const guides = defineCollection({
     title: z.string().max(80),
     description: z.string().max(160),
     category: categoryEnum,
+    tldr: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     publishDate: z.coerce.date(),
