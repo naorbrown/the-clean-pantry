@@ -3,6 +3,7 @@ import PageLayout from './PageLayout.astro';
 import Breadcrumb from '../components/ui/Breadcrumb.astro';
 import CategoryIcon from '../components/ui/CategoryIcon.astro';
 import TableOfContents from '../components/ui/TableOfContents.astro';
+import AtAGlance from '../components/ui/AtAGlance.astro';
 import RelatedContent from '../components/ui/RelatedContent.astro';
 import { categoryLabel, url } from '../lib/utils';
 import { getCollection } from 'astro:content';
@@ -75,6 +76,8 @@ const related = [...relatedGuides, ...relatedRecipes].slice(0, 6);
       </h1>
       <p class="text-bark-light/80 dark:text-dark-text/70">{description}</p>
     </div>
+
+    <AtAGlance items={guide.data.tldr} />
 
     <!-- Two-column layout: TOC sidebar + content -->
     <div class="lg:grid lg:grid-cols-[200px_1fr] lg:gap-10">
