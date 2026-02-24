@@ -57,16 +57,20 @@ test.describe('Car Care – Guides', () => {
 });
 
 test.describe('Car Care – Recipes', () => {
-  test('car care category page shows all 16 recipes', async ({ page }) => {
+  test('car care category page shows all 20 recipes', async ({ page }) => {
     await page.goto('/categories/car-care/');
     const recipeCards = page.locator('a[href*="/recipes/car-care/"]');
-    expect(await recipeCards.count()).toBe(16);
+    expect(await recipeCards.count()).toBe(20);
   });
 
   test('all new car recipes load with 200 status', async ({ page }) => {
     const newCarRecipes = [
       '/recipes/car-care/natural-paint-sealant/',
       '/recipes/car-care/new-car-fabric-protector/',
+      '/recipes/car-care/streak-free-glass-cleaner/',
+      '/recipes/car-care/new-car-leather-protector/',
+      '/recipes/car-care/cabin-freshening-mist/',
+      '/recipes/car-care/floor-mat-cleaner/',
     ];
     for (const url of newCarRecipes) {
       const response = await page.goto(url);
@@ -187,11 +191,43 @@ test.describe('Car Care – Content Integrity', () => {
       '/recipes/car-care/rust-spot-remover/',
       '/recipes/car-care/oxidized-paint-polish/',
       '/recipes/car-care/new-car-fabric-protector/',
+      '/recipes/car-care/streak-free-glass-cleaner/',
+      '/recipes/car-care/new-car-leather-protector/',
+      '/recipes/car-care/cabin-freshening-mist/',
+      '/recipes/car-care/floor-mat-cleaner/',
     ];
     for (const url of recipes) {
       await page.goto(url);
       const body = await page.textContent('body');
       expect(body).not.toContain('How to Make It');
     }
+  });
+
+  test('streak-free glass cleaner has standard headings', async ({ page }) => {
+    await page.goto('/recipes/car-care/streak-free-glass-cleaner/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Why It Works' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Tips' })).toBeVisible();
+  });
+
+  test('cabin freshening mist has standard headings', async ({ page }) => {
+    await page.goto('/recipes/car-care/cabin-freshening-mist/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Why It Works' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Tips' })).toBeVisible();
+  });
+
+  test('floor mat cleaner has standard headings', async ({ page }) => {
+    await page.goto('/recipes/car-care/floor-mat-cleaner/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Why It Works' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Tips' })).toBeVisible();
+  });
+
+  test('new car leather protector has standard headings', async ({ page }) => {
+    await page.goto('/recipes/car-care/new-car-leather-protector/');
+    await expect(page.locator('h2', { hasText: 'Steps' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Why It Works' })).toBeVisible();
+    await expect(page.locator('h2', { hasText: 'Tips' })).toBeVisible();
   });
 });
