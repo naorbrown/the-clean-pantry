@@ -83,11 +83,11 @@ describe('getCategoryIcon', () => {
 });
 
 describe('getCategories', () => {
-  it('returns all 26 categories sorted by order', () => {
+  it('returns all 27 categories sorted by order', () => {
     const cats = getCategories();
-    expect(cats).toHaveLength(26);
+    expect(cats).toHaveLength(27);
     expect(cats[0].slug).toBe('kitchen');
-    expect(cats[25].slug).toBe('condiments');
+    expect(cats[26].slug).toBe('travel');
   });
 
   it('each category has slug, name, description, icon, and order', () => {
